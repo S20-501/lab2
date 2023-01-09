@@ -31,7 +31,7 @@ architecture a_ma_tester of ma_tester is
 			begin
 				IData_In	<= (others => '0');
 				QData_In	<= (others => '0');
-				MANumber	<= b"00101"; -- 5
+				MANumber	<= b"00011"; -- 3
 				
 				skiptime_clk(2);
 				
@@ -52,11 +52,71 @@ architecture a_ma_tester of ma_tester is
 				IData_In <= b"0000001101"; -- 13
 				QData_In <= b"0000001101"; -- 13
 				skiptime_clk(1);
-				IData_In <= b"0000001111"; -- 14
-				QData_In <= b"0000001111"; -- 14
+				IData_In <= b"0000001110"; -- 14
+				QData_In <= b"0000001110"; -- 14
 				skiptime_clk(1);
+				IData_In <= b"0000001111"; -- 15
+				QData_In <= b"0000001111"; -- 15
+				skiptime_clk(1);
+				IData_In <= b"0000010000"; -- 16
+				QData_In <= b"0000010000"; -- 16
+				skiptime_clk(1);
+				IData_In <= b"0000010001"; -- 17
+				QData_In <= b"0000010001"; -- 17
+				skiptime_clk(1);
+				IData_In <= b"0000010010"; -- 18
+				QData_In <= b"0000010010"; -- 18
+				skiptime_clk(1);
+				IData_In <= b"0000010011"; -- 19
+				QData_In <= b"0000010011"; -- 19
+				skiptime_clk(1);
+				IData_In <= b"0000010100"; -- 20
+				QData_In <= b"0000010100"; -- 20
+				skiptime_clk(1);
+				IData_In <= b"0000010101"; -- 21
+				QData_In <= b"0000010101"; -- 21
+				skiptime_clk(30);
 				
-				skiptime_clk(100);
+				MANumber	<= b"00100"; -- 4
+				
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001011"; -- 11
+				QData_In <= b"0000001011"; -- 11
+				skiptime_clk(1);
+				IData_In <= b"0000001100"; -- 12
+				QData_In <= b"0000001100"; -- 12
+				skiptime_clk(1);
+				IData_In <= b"0000001101"; -- 13
+				QData_In <= b"0000001101"; -- 13
+				skiptime_clk(1);
+				IData_In <= b"0000001110"; -- 14
+				QData_In <= b"0000001110"; -- 14
+				skiptime_clk(1);
+				IData_In <= b"0000001111"; -- 15
+				QData_In <= b"0000001111"; -- 15
+				skiptime_clk(1);
+				IData_In <= b"0000010000"; -- 16
+				QData_In <= b"0000010000"; -- 16
+				skiptime_clk(1);
+				IData_In <= b"0000010001"; -- 17
+				QData_In <= b"0000010001"; -- 17
+				skiptime_clk(1);
+				IData_In <= b"0000010010"; -- 18
+				QData_In <= b"0000010010"; -- 18
+				skiptime_clk(1);
+				IData_In <= b"0000010011"; -- 19
+				QData_In <= b"0000010011"; -- 19
+				skiptime_clk(1);
+				IData_In <= b"0000010100"; -- 20
+				QData_In <= b"0000010100"; -- 20
+				skiptime_clk(1);
+				IData_In <= b"0000010101"; -- 21
+				QData_In <= b"0000010101"; -- 21
+				skiptime_clk(30);
+				
+				skiptime_clk(10000);
 				
 		end process;	
 
