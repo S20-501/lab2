@@ -2,6 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 --use ieee.std_logic_arith.all;
 use ieee.std_logic_unsigned.all;
+use work.sevenseg_pkg11.all;
 entity tb_Protocol_exchange_module is
 end;
 
@@ -32,7 +33,7 @@ architecture tb_Protocol_exchange_module_arch of tb_Protocol_exchange_module is
    signal WB_Cyc_3 :  std_logic;
    signal WB_Ack :  std_logic;--????????????? ???????? ?????????? ????????? ???????? ??????
    signal WB_CTI :  std_logic_vector (2 downto 0);-- ?000? ? ??????? ????; ??????
-
+   signal rcurrent_state :  current_type;
 	begin
 		i_Module : entity work.Protocol_exchange_module(rtl)
 		port map(
@@ -58,8 +59,8 @@ architecture tb_Protocol_exchange_module_arch of tb_Protocol_exchange_module is
 					WB_Cyc_2 => WB_Cyc_2,
 					WB_Cyc_3 => WB_Cyc_3,
 					WB_Ack => WB_Ack,
-					WB_CTI => WB_CTI
-
+					WB_CTI => WB_CTI,
+					rcurrent_state => rcurrent_state
 
 				);
 		i_tb_Module : entity work.tester_Protocol_exchange_module(rlt)
@@ -90,3 +91,4 @@ architecture tb_Protocol_exchange_module_arch of tb_Protocol_exchange_module is
 					
 				);
 end architecture;
+     
