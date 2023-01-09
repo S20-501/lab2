@@ -86,6 +86,9 @@ begin
 			if(MANumber = "00001") then
 				IData_Out_r <= IData_In;
 				QData_out_r <= QData_In;
+			elsif(MANumber = "00000") then
+				IData_Out_r <= "0000000000";
+				QData_out_r <= "0000000000";
 			else
 				moving_average1_r	<= IData_In & moving_average1_r(0 to moving_average1_r'length-2);
 				acc1_r					<= acc1_r + IData_In - moving_average1_r(conv_integer(MANumber)-1);
