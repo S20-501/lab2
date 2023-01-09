@@ -39,20 +39,20 @@ entity Protocol_exchange_module is
     WB_Cyc_2 : out std_logic;
     WB_Cyc_3 : out std_logic;
     WB_Ack : in std_logic;--????????????? ???????? ?????????? ????????? ???????? ??????
-    WB_CTI : out std_logic_vector (2 downto 0);-- ?000? ? ??????? ????; ??????
+    WB_CTI : out std_logic_vector (2 downto 0)-- ?000? ? ??????? ????; ??????
     -- ?001? ? ???????? ???? ? ????????????? ???????; ?? ???
     -- ?010? ? ???????? ???? ? ???????????????? ???????; ???
     -- ?011-110? ? ???????????????;
     -- ?111? ? ????????? ?????
-    rcurrent_state : out current_type
+    --rcurrent_state : out current_type
   );
 end entity;
 architecture rtl of Protocol_exchange_module is
   --type current_type is (state_wait, header_read, addres_check, header_analysis, header_transfer, data_transfer, error_handling);
   signal header_word_count : std_logic_vector(1 downto 0);
   signal current_state : current_type;
-  signal double_write_s : std_logic;
-  signal header_transfer_end_s : std_logic;
+  signal double_write_r : std_logic;
+  signal header_transfer_end_r : std_logic;
   signal read_en_r : std_logic_vector(1 downto 0);
   --signal write_en_r : std_logic_vector(1 downto 0);
   signal byte_count : std_logic_vector(10 downto 0);
@@ -72,11 +72,11 @@ architecture rtl of Protocol_exchange_module is
   --signal WB_we_s : std_logic;
   --signal WB_sel_r : std_logic_vector (1 downto 0);
   --signal WB_stb_s : std_logic;
-  signal WB_cyc_0_s : std_logic;
-  signal WB_cyc_1_s : std_logic;
-  signal WB_cyc_2_s : std_logic;
-  signal WB_cyc_3_s : std_logic;
-  signal WB_ack_check_s : std_logic;
+  signal WB_cyc_0_r : std_logic;
+  signal WB_cyc_1_r : std_logic;
+  signal WB_cyc_2_r : std_logic;
+  signal WB_cyc_3_r : std_logic;
+  signal WB_ack_check_r : std_logic;
   --signal WB_cti_r : std_logic_vector (2 downto 0);
 
   signal WB_ready_r : std_logic_vector (1 downto 0);
@@ -85,67 +85,67 @@ begin
   process (Clk, nRst) begin
     if (nRst = '0') then
       current_state <= state_wait;
-      rcurrent_state <= state_wait;
+      --rcurrent_state <= state_wait;
 
     elsif (rising_edge(Clk)) then
       case current_state is
         when state_wait =>
           if (usedw_input_fi > 2) then
             current_state <= header_read;
-            rcurrent_state <= header_read;
+            --rcurrent_state <= header_read;
           end if;
 
         when header_read =>
           if (header_word_count = B"01") then
             current_state <= addres_check;
-            rcurrent_state <= addres_check;
+            --rcurrent_state <= addres_check;
           end if;
 
         when addres_check =>
           current_state <= header_analysis;
-          rcurrent_state <= header_analysis;
+          --rcurrent_state <= header_analysis;
 
         when header_analysis =>
           if (FB_r = '0' and AddrValid_r = B"000") then
             if (Cmd_r = B"010" or Cmd_r = B"100" or Cmd_r = B"110") then
               current_state <= data_transfer;
-              rcurrent_state <= data_transfer;
+              --rcurrent_state <= data_transfer;
             else
               current_state <= header_transfer;
-              rcurrent_state <= header_transfer;
+              --rcurrent_state <= header_transfer;
             end if;
           else
             current_state <= header_transfer;
-            rcurrent_state <= header_transfer;
+            --rcurrent_state <= header_transfer;
           end if;
 
         when header_transfer =>
-          if (header_transfer_end_s = '1') then
-            if (double_write_s = '1') then
+          if (header_transfer_end_r = '1') then
+            if (double_write_r = '1') then
               current_state <= header_transfer;
-              rcurrent_state <= header_transfer;
+              --rcurrent_state <= header_transfer;
             elsif (AddrValid_r = B"000") then
               current_state <= data_transfer;
-              rcurrent_state <= data_transfer;
+              --rcurrent_state <= data_transfer;
             elsif (Cmd_r = B"001" or Cmd_r = B"011" or Cmd_r = B"101") then
-              rcurrent_state <= error_handling;
-              rcurrent_state <= error_handling;
+              current_state <= error_handling;
+              --rcurrent_state <= error_handling;
             else
               current_state <= state_wait;
-              rcurrent_state <= state_wait;
+              --rcurrent_state <= state_wait;
             end if;
           end if;
 
         when data_transfer =>
           if (byte_count = 0 or byte_count = 2047) then
             current_state <= state_wait;
-            rcurrent_state <= state_wait;
+            --rcurrent_state <= state_wait;
           end if;
 
         when error_handling =>
           if (byte_count = 0 or byte_count = 2047) then
             current_state <= state_wait;
-            rcurrent_state <= state_wait;
+            --rcurrent_state <= state_wait;
           end if;
       end case;
 
@@ -168,17 +168,17 @@ begin
       Addr_write_r <= (others => '0');
       rdreq_output <= '0';
       wrreq_output <= '0';
-      double_write_s <= '0';
-      header_transfer_end_s <= '0';
+      double_write_r <= '0';
+      header_transfer_end_r <= '0';
 
       data_output <= (others => '0');
 
       WB_DataOut <= (others => '0');
-      WB_cyc_0_s <= '0';
-      WB_cyc_1_s <= '0';
-      WB_cyc_2_s <= '0';
-      WB_cyc_3_s <= '0';
-      WB_ack_check_s <= '0';
+      WB_cyc_0_r <= '0';
+      WB_cyc_1_r <= '0';
+      WB_cyc_2_r <= '0';
+      WB_cyc_3_r <= '0';
+      WB_ack_check_r <= '0';
       WB_ready_r <= B"00";
       WB_Addr <= (others => '0');
       WB_WE <= '0';
@@ -205,7 +205,11 @@ begin
             R1_r <= q_input(5 downto 4);
             BCount_r <= q_input(15 downto 6);
             byte_count(9 downto 0) <= q_input(15 downto 6);
-            byte_count(10) <= '0';
+				if (q_input(15 downto 6) = B"000000000") then
+					byte_count(10) <= '1';
+				else
+					byte_count(10) <= '0';
+				end if;
           elsif (header_word_count = B"10") then
             TID_r <= q_input(7 downto 0);
             AddrValid_r <= q_input(10 downto 8);
@@ -223,10 +227,10 @@ begin
           if ((Addr_r + byte_count) < X"0100") then
             Addr_write_r <= Addr_r;
             AddrValid_r <= B"000";
-            WB_Cyc_0_s <= '1';
-            WB_Cyc_1_s <= '0';
-            WB_Cyc_2_s <= '0';
-            WB_Cyc_3_s <= '0';
+            WB_Cyc_0_r <= '1';
+            WB_Cyc_1_r <= '0';
+            WB_Cyc_2_r <= '0';
+            WB_Cyc_3_r <= '0';
           else
             AddrValid_r <= B"001";
             Addr_r <= X"0100";
@@ -236,10 +240,10 @@ begin
           if ((Addr_r + byte_count) < X"0200") then
             Addr_write_r <= Addr_r - X"0100";
             AddrValid_r <= B"000";
-            WB_Cyc_0_s <= '0';
-            WB_Cyc_1_s <= '1';
-            WB_Cyc_2_s <= '0';
-            WB_Cyc_3_s <= '0';
+            WB_Cyc_0_r <= '0';
+            WB_Cyc_1_r <= '1';
+            WB_Cyc_2_r <= '0';
+            WB_Cyc_3_r <= '0';
           else
             AddrValid_r <= B"010";
             Addr_r <= X"0100";
@@ -249,10 +253,10 @@ begin
           if ((Addr_r + byte_count) < X"0300") then
             Addr_write_r <= Addr_r - X"0200";
             AddrValid_r <= B"000";
-            WB_Cyc_0_s <= '0';
-            WB_Cyc_1_s <= '0';
-            WB_Cyc_2_s <= '1';
-            WB_Cyc_3_s <= '0';
+            WB_Cyc_0_r <= '0';
+            WB_Cyc_1_r <= '0';
+            WB_Cyc_2_r <= '1';
+            WB_Cyc_3_r <= '0';
           else
             AddrValid_r <= B"011";
             Addr_r <= X"0100";
@@ -262,10 +266,10 @@ begin
           if ((Addr_r + byte_count) < X"0400") then
             Addr_write_r <= Addr_r - X"0300";
             AddrValid_r <= B"000";
-            WB_Cyc_0_s <= '0';
-            WB_Cyc_1_s <= '0';
-            WB_Cyc_2_s <= '0';
-            WB_Cyc_3_s <= '1';
+            WB_Cyc_0_r <= '0';
+            WB_Cyc_1_r <= '0';
+            WB_Cyc_2_r <= '0';
+            WB_Cyc_3_r <= '1';
           else
             AddrValid_r <= B"100";
             Addr_r <= X"0100";
@@ -286,11 +290,11 @@ begin
         --===============================================================================================================================
       elsif (current_state = header_transfer) then
         if (header_word_count = B"00") then
-          header_transfer_end_s <= '0';
-          if (double_write_s = '1') then
-            double_write_s <= '0';
+          header_transfer_end_r <= '0';
+          if (double_write_r = '1') then
+            double_write_r <= '0';
           elsif (FB_r = '1' and AddrValid_r = B"000" and (Cmd_r = B"001" or Cmd_r = B"011" or Cmd_r = B"101")) then
-            double_write_s <= '1';
+            double_write_r <= '1';
           end if;
           header_word_count <= B"11";
         else
@@ -309,12 +313,12 @@ begin
               header_word_count <= header_word_count - B"01";
             elsif (header_word_count = B"01") then
               data_output <= Addr_r;
-              header_transfer_end_s <= '1';
+              header_transfer_end_r <= '1';
             end if;
 
-            if (header_transfer_end_s = '1') then
+            if (header_transfer_end_r = '1') then
               wrreq_output <= '0';
-              header_transfer_end_s <= '0';
+              header_transfer_end_r <= '0';
               header_word_count <= B"00";
             end if;
           end if;
@@ -335,8 +339,8 @@ begin
       elsif (current_state = data_transfer) then
         ---------------------------------------------------------------------------------------------------------------------------------
         if (Cmd_r = B"001") then--?????? ???????????????? ??????
-          if (WB_ack_check_s = '0') then
-            WB_ack_check_s <= WB_Ack;
+          if (WB_ack_check_r = '0') then
+            WB_ack_check_r <= WB_Ack;
           end if;
           if (byte_count = 0 or byte_count = 2047) then
             wrreq_output <= '0';
@@ -347,10 +351,10 @@ begin
               WB_Addr <= Addr_write_r;
               WB_WE <= '0';
               WB_STB <= '1';
-              WB_Cyc_0 <= WB_cyc_0_s;
-              WB_Cyc_1 <= WB_cyc_1_s;
-              WB_Cyc_2 <= WB_cyc_2_s;
-              WB_Cyc_3 <= WB_cyc_3_s;
+              WB_Cyc_0 <= WB_cyc_0_r;
+              WB_Cyc_1 <= WB_cyc_1_r;
+              WB_Cyc_2 <= WB_cyc_2_r;
+              WB_Cyc_3 <= WB_cyc_3_r;
               wrreq_output <= '0';
               WB_ready_r <= B"01";
               if (byte_count = 2) then
@@ -364,8 +368,8 @@ begin
                 WB_CTI <= B"000";
               end if;
             elsif (WB_ready_r = B"01") then
-              if (WB_Ack = '1' or WB_ack_check_s = '1') then
-                WB_ack_check_s <= '0';
+              if (WB_Ack = '1' or WB_ack_check_r = '1') then
+                WB_ack_check_r <= '0';
                 WB_STB <= '0';
                 if (byte_count = 1 or byte_count = 2) then
                   WB_Cyc_0 <= '0';
@@ -381,13 +385,13 @@ begin
                 --if (WB_ready_r = B"11") then
                 --WB_ready_r <= B"00";
                 --wrreq_output <= '1';
-                if (WB_Cyc_0_s = '1') then
+                if (WB_Cyc_0_r = '1') then
                   data_output <= WB_DataIn_0;
-                elsif (WB_Cyc_1_s = '1') then
+                elsif (WB_Cyc_1_r = '1') then
                   data_output <= WB_DataIn_1;
-                elsif (WB_Cyc_2_s = '1') then
+                elsif (WB_Cyc_2_r = '1') then
                   data_output <= WB_DataIn_2;
-                elsif (WB_Cyc_3_s = '1') then
+                elsif (WB_Cyc_3_r = '1') then
                   data_output <= WB_DataIn_3;
                 end if;
               end if;
@@ -398,8 +402,8 @@ begin
           end if;
           -------------------------------------------------------------------------------------------------------------------------------------
         elsif (Cmd_r = B"010") then--?????? ???????????????? ??????
-          if (WB_ack_check_s = '0') then
-            WB_ack_check_s <= WB_Ack;
+          if (WB_ack_check_r = '0') then
+            WB_ack_check_r <= WB_Ack;
           end if;
           if (WB_ready_r = B"00" and usedw_input_fi > 0) then
             rdreq_output <= '1';
@@ -407,10 +411,10 @@ begin
             WB_STB <= '0';
             ------------------------------------------------
           elsif (WB_ready_r = B"01") then
-            if (WB_Ack = '1' or WB_ack_check_s = '1') then
+            if (WB_Ack = '1' or WB_ack_check_r = '1') then
               WB_STB <= '0';
               if (usedw_input_fi > 0 or byte_count = 2 or byte_count = 1) then
-                WB_ack_check_s <= '0';
+                WB_ack_check_r <= '0';
                 if (byte_count = 2 or byte_count = 1) then
                   rdreq_output <= '0';
                   WB_Cyc_0 <= '0';
@@ -439,10 +443,10 @@ begin
             WB_Addr <= Addr_write_r;
             WB_WE <= '1';
             WB_STB <= '1';
-            WB_Cyc_0 <= WB_cyc_0_s;
-            WB_Cyc_1 <= WB_cyc_1_s;
-            WB_Cyc_2 <= WB_cyc_2_s;
-            WB_Cyc_3 <= WB_cyc_3_s;
+            WB_Cyc_0 <= WB_cyc_0_r;
+            WB_Cyc_1 <= WB_cyc_1_r;
+            WB_Cyc_2 <= WB_cyc_2_r;
+            WB_Cyc_3 <= WB_cyc_3_r;
             WB_DataOut <= q_input;
             if (byte_count = 2) then
               WB_Sel <= B"11";
@@ -458,8 +462,8 @@ begin
             rdreq_output <= '0';
           end if;
         elsif (Cmd_r = B"011") then--?????? ???????????????? ??????
-          if (WB_ack_check_s = '0') then
-            WB_ack_check_s <= WB_Ack;
+          if (WB_ack_check_r = '0') then
+            WB_ack_check_r <= WB_Ack;
           end if;
           if (byte_count = 0 or byte_count = 2047) then
             wrreq_output <= '0';
@@ -470,10 +474,10 @@ begin
               WB_Addr <= Addr_write_r;
               WB_WE <= '0';
               WB_STB <= '1';
-              WB_Cyc_0 <= WB_cyc_0_s;
-              WB_Cyc_1 <= WB_cyc_1_s;
-              WB_Cyc_2 <= WB_cyc_2_s;
-              WB_Cyc_3 <= WB_cyc_3_s;
+              WB_Cyc_0 <= WB_cyc_0_r;
+              WB_Cyc_1 <= WB_cyc_1_r;
+              WB_Cyc_2 <= WB_cyc_2_r;
+              WB_Cyc_3 <= WB_cyc_3_r;
               wrreq_output <= '0';
               WB_ready_r <= B"01";
               if (byte_count = 2) then
@@ -487,8 +491,8 @@ begin
                 WB_CTI <= B"001";
               end if;
             elsif (WB_ready_r = B"01") then
-              if (WB_Ack = '1' or WB_ack_check_s = '1') then
-                WB_ack_check_s <= '0';
+              if (WB_Ack = '1' or WB_ack_check_r = '1') then
+                WB_ack_check_r <= '0';
                 WB_STB <= '0';
                 if (byte_count = 1 or byte_count = 2) then
                   WB_Cyc_0 <= '0';
@@ -504,13 +508,13 @@ begin
                 --if (WB_ready_r = B"11") then
                 --WB_ready_r <= B"00";
                 --wrreq_output <= '1';
-                if (WB_Cyc_0_s = '1') then
+                if (WB_Cyc_0_r = '1') then
                   data_output <= WB_DataIn_0;
-                elsif (WB_Cyc_1_s = '1') then
+                elsif (WB_Cyc_1_r = '1') then
                   data_output <= WB_DataIn_1;
-                elsif (WB_Cyc_2_s = '1') then
+                elsif (WB_Cyc_2_r = '1') then
                   data_output <= WB_DataIn_2;
-                elsif (WB_Cyc_3_s = '1') then
+                elsif (WB_Cyc_3_r = '1') then
                   data_output <= WB_DataIn_3;
                 end if;
               end if;
@@ -521,8 +525,8 @@ begin
           end if;
           -------------------------------------------------------------------------------------------------------------------------------------
         elsif (Cmd_r = B"100") then--?????? ???????????????? ??????
-          if (WB_ack_check_s = '0') then
-            WB_ack_check_s <= WB_Ack;
+          if (WB_ack_check_r = '0') then
+            WB_ack_check_r <= WB_Ack;
           end if;
           if (WB_ready_r = B"00" and usedw_input_fi > 0) then
             rdreq_output <= '1';
@@ -530,10 +534,10 @@ begin
             WB_STB <= '0';
             ------------------------------------------------
           elsif (WB_ready_r = B"01") then
-            if (WB_Ack = '1' or WB_ack_check_s = '1') then
+            if (WB_Ack = '1' or WB_ack_check_r = '1') then
               WB_STB <= '0';
               if (usedw_input_fi > 0 or byte_count = 2 or byte_count = 1) then
-                WB_ack_check_s <= '0';
+                WB_ack_check_r <= '0';
                 if (byte_count = 2 or byte_count = 1) then
                   rdreq_output <= '0';
                   WB_Cyc_0 <= '0';
@@ -561,10 +565,10 @@ begin
             WB_Addr <= Addr_write_r;
             WB_WE <= '1';
             WB_STB <= '1';
-            WB_Cyc_0 <= WB_cyc_0_s;
-            WB_Cyc_1 <= WB_cyc_1_s;
-            WB_Cyc_2 <= WB_cyc_2_s;
-            WB_Cyc_3 <= WB_cyc_3_s;
+            WB_Cyc_0 <= WB_cyc_0_r;
+            WB_Cyc_1 <= WB_cyc_1_r;
+            WB_Cyc_2 <= WB_cyc_2_r;
+            WB_Cyc_3 <= WB_cyc_3_r;
             WB_DataOut <= q_input;
             if (byte_count = 2) then
               WB_Sel <= B"11";
@@ -581,8 +585,8 @@ begin
           end if;
 
         elsif (Cmd_r = B"101") then--?????? ???????????????? ??????
-          if (WB_ack_check_s = '0') then
-            WB_ack_check_s <= WB_Ack;
+          if (WB_ack_check_r = '0') then
+            WB_ack_check_r <= WB_Ack;
           end if;
           if (byte_count = 0 or byte_count = 2047) then
             wrreq_output <= '0';
@@ -594,10 +598,10 @@ begin
               Addr_write_r <= Addr_write_r + B"10";
               WB_WE <= '0';
               WB_STB <= '1';
-              WB_Cyc_0 <= WB_cyc_0_s;
-              WB_Cyc_1 <= WB_cyc_1_s;
-              WB_Cyc_2 <= WB_cyc_2_s;
-              WB_Cyc_3 <= WB_cyc_3_s;
+              WB_Cyc_0 <= WB_cyc_0_r;
+              WB_Cyc_1 <= WB_cyc_1_r;
+              WB_Cyc_2 <= WB_cyc_2_r;
+              WB_Cyc_3 <= WB_cyc_3_r;
               wrreq_output <= '0';
               WB_ready_r <= B"01";
               if (byte_count = 2) then
@@ -611,8 +615,8 @@ begin
                 WB_CTI <= B"010";
               end if;
             elsif (WB_ready_r = B"01") then
-              if (WB_Ack = '1' or WB_ack_check_s = '1') then
-                WB_ack_check_s <= '0';
+              if (WB_Ack = '1' or WB_ack_check_r = '1') then
+                WB_ack_check_r <= '0';
                 WB_STB <= '0';
                 if (byte_count = 1 or byte_count = 2) then
                   WB_Cyc_0 <= '0';
@@ -628,13 +632,13 @@ begin
                 --if (WB_ready_r = B"11") then
                 --WB_ready_r <= B"00";
                 --wrreq_output <= '1';
-                if (WB_Cyc_0_s = '1') then
+                if (WB_Cyc_0_r = '1') then
                   data_output <= WB_DataIn_0;
-                elsif (WB_Cyc_1_s = '1') then
+                elsif (WB_Cyc_1_r = '1') then
                   data_output <= WB_DataIn_1;
-                elsif (WB_Cyc_2_s = '1') then
+                elsif (WB_Cyc_2_r = '1') then
                   data_output <= WB_DataIn_2;
-                elsif (WB_Cyc_3_s = '1') then
+                elsif (WB_Cyc_3_r = '1') then
                   data_output <= WB_DataIn_3;
                 end if;
               end if;
@@ -645,8 +649,8 @@ begin
           end if;
           -------------------------------------------------------------------------------------------------------------------------------------
         elsif (Cmd_r = B"110") then--?????? ???????????????? ??????
-          if (WB_ack_check_s = '0') then
-            WB_ack_check_s <= WB_Ack;
+          if (WB_ack_check_r = '0') then
+            WB_ack_check_r <= WB_Ack;
           end if;
           if (WB_ready_r = B"00" and usedw_input_fi > 0) then
             rdreq_output <= '1';
@@ -654,10 +658,10 @@ begin
             WB_STB <= '0';
             ------------------------------------------------
           elsif (WB_ready_r = B"01") then
-            if (WB_Ack = '1' or WB_ack_check_s = '1') then
+            if (WB_Ack = '1' or WB_ack_check_r = '1') then
               WB_STB <= '0';
               if (usedw_input_fi > 0 or byte_count = 2 or byte_count = 1) then
-                WB_ack_check_s <= '0';
+                WB_ack_check_r <= '0';
                 if (byte_count = 2 or byte_count = 1) then
                   rdreq_output <= '0';
                   WB_Cyc_0 <= '0';
@@ -686,10 +690,10 @@ begin
             Addr_write_r <= Addr_write_r + B"10";
             WB_WE <= '1';
             WB_STB <= '1';
-            WB_Cyc_0 <= WB_cyc_0_s;
-            WB_Cyc_1 <= WB_cyc_1_s;
-            WB_Cyc_2 <= WB_cyc_2_s;
-            WB_Cyc_3 <= WB_cyc_3_s;
+            WB_Cyc_0 <= WB_cyc_0_r;
+            WB_Cyc_1 <= WB_cyc_1_r;
+            WB_Cyc_2 <= WB_cyc_2_r;
+            WB_Cyc_3 <= WB_cyc_3_r;
             WB_DataOut <= q_input;
             if (byte_count = 2) then
               WB_Sel <= B"11";
