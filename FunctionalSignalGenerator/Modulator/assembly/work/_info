@@ -9,10 +9,10 @@ z2
 cModel Technology
 dD:/FPGA/lab2/VectorNetworkAnalyzer/analyzer_dds_demultiplexer_tt
 Eenc_8b10b
-Z0 w1672299098
+Z0 w1671211896
 Z1 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z2 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
-Z3 dD:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2
+Z3 dD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly
 Z4 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/8b10_enc.vhd
 Z5 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/8b10_enc.vhd
 l0
@@ -21,9 +21,9 @@ VNk:bU<@Wni<fTLgzYARH?2
 !s100 `W@Re01kZY]29TgQ9`2LL3
 Z6 OV;C;10.5b;63
 33
-Z7 !s110 1672338540
+Z7 !s110 1673339280
 !i10b 1
-Z8 !s108 1672338540.000000
+Z8 !s108 1673339280.000000
 Z9 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/8b10_enc.vhd|
 Z10 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/8b10_enc.vhd|
 !i113 1
@@ -91,32 +91,32 @@ R18
 R11
 R12
 Egenerator
-R0
+Z19 w1671529398
 R14
-Z19 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
+Z20 DPx4 ieee 16 std_logic_signed 0 22 C<aanc0R`<LWPSe[JYRP^3
 R13
 R1
 R2
 R3
-Z20 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator.vhd
-Z21 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator.vhd
+Z21 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator.vhd
+Z22 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator.vhd
 l0
 L7
 V5?Po=YRz=EUABz@kK[]@91
 !s100 O?P9[XZi=@JCPPf8_>YAR1
 R6
 33
-Z22 !s110 1672338541
+R7
 !i10b 1
-Z23 !s108 1672338541.000000
-Z24 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator.vhd|
-Z25 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator.vhd|
+R8
+Z23 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator.vhd|
+Z24 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator.vhd|
 !i113 1
 R11
 R12
 Aa_generator
 R14
-R19
+R20
 R13
 R1
 R2
@@ -127,129 +127,177 @@ V6V8GBPVR64>]3<7@B0G<f0
 !s100 TWR:d3E_Q8F]4JmzP79mH0
 R6
 33
-R22
+R7
 !i10b 1
+R8
 R23
 R24
-R25
 !i113 1
 R11
 R12
 Egenerator_assembly2
-Z26 w1672305839
+Z25 w1672342178
 R14
-R19
+R20
 R13
 R1
 R2
 R3
-Z27 8D:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2/generator_assembly.vhd
-Z28 FD:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2/generator_assembly.vhd
+Z26 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly.vhd
+Z27 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly.vhd
 l0
 L7
-V6TaWcAW5ffJ1TV`^07f092
-!s100 7cZ85RGWRkG8zmCnUj@Ak1
+VRo^?1@n8UJaRb5[Oh6mz71
+!s100 V=iJ9cW@ME3n]@l^56=m<3
 R6
-33
-R7
+32
+Z28 !s110 1673339281
 !i10b 1
-R8
-Z29 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2/generator_assembly.vhd|
-Z30 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2/generator_assembly.vhd|
+Z29 !s108 1673339281.000000
+Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly.vhd|
+Z31 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly.vhd|
 !i113 1
-R11
+Z32 o-work work -2002 -explicit
 R12
 Aa_generator_assembly
-Z31 DPx3 std 3 env 0 22 d?`1ck@NdeD@H3RZG7FgZ2
-Z32 DEx4 work 26 generator_assembly2_tester 0 22 mge5jPDEGGnTQ;D:]cn7d1
-Z33 DEx4 work 14 gsmregistr_top 0 22 F_[Veg=6GibaCDeG:GMPj1
+Z33 DEx4 work 14 gsmregistr_top 0 22 o1HkA0^ZBc^SKmVEM@JE91
 Z34 DEx4 work 13 generator_top 0 22 k`GV9:RY<CMM5IPfEd:@l1
 Z35 DEx4 work 9 modulator 0 22 L49Q3E[2L[7O`b1XgZk;22
 R14
-R19
+R20
 R13
 R1
 R2
-DEx4 work 19 generator_assembly2 0 22 6TaWcAW5ffJ1TV`^07f092
-l91
-L43
-Vh@?O[LD>OD7UMh5;;4LnM1
-!s100 oCL<5O_TESX`oBM8EHz^`3
+DEx4 work 19 generator_assembly2 0 22 Ro^?1@n8UJaRb5[Oh6mz71
+l42
+L27
+V>K@^Ta`81;23f]bKHfZGY0
+!s100 :U32h[>U2cVS74114mGES3
 R6
-33
-R7
+32
+R28
 !i10b 1
-R8
 R29
 R30
+R31
+!i113 1
+R32
+R12
+Egenerator_assembly2_tb
+Z36 w1672342262
+R14
+R20
+R13
+R1
+R2
+R3
+Z37 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly_tb.vhd
+Z38 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly_tb.vhd
+l0
+L7
+VdUH_KXPdJaFA@EKN5ml`F1
+!s100 k2aPUTBDJ`j38[OgTH5mh2
+R6
+32
+R28
+!i10b 1
+R29
+Z39 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly_tb.vhd|
+Z40 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly_tb.vhd|
+!i113 1
+R32
+R12
+Aa_generator_assembly
+Z41 DPx3 std 3 env 0 22 d?`1ck@NdeD@H3RZG7FgZ2
+Z42 DEx4 work 26 generator_assembly2_tester 0 22 [`IW]fnVGfCRiUzG9?8[@2
+R33
+R34
+R35
+R14
+R20
+R13
+R1
+R2
+DEx4 work 22 generator_assembly2_tb 0 22 dUH_KXPdJaFA@EKN5ml`F1
+l40
+L10
+VjQ?6:5SD]8FmM63l`OMJn2
+!s100 0zDgE[9O`QOfC`WFF`UVP1
+R6
+32
+R28
+!i10b 1
+R29
+R39
+R40
+!i113 1
+R32
+R12
+Egenerator_assembly2_tester
+Z43 w1672303515
+R41
+R14
+R13
+R1
+R2
+R3
+Z44 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly_tester.vhd
+Z45 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly_tester.vhd
+l0
+L9
+V[`IW]fnVGfCRiUzG9?8[@2
+!s100 0^Aoz6?Mjm3?BQbk8YfF=1
+R6
+33
+R28
+!i10b 1
+R29
+Z46 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly_tester.vhd|
+Z47 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly_tester.vhd|
 !i113 1
 R11
 R12
-Egenerator_assembly2_tester
-Z36 w1672303515
-R31
-R14
-R13
-R1
-R2
-R3
-Z37 8D:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2/generator_assembly_tester.vhd
-Z38 FD:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2/generator_assembly_tester.vhd
-l0
-L9
-Vmge5jPDEGGnTQ;D:]cn7d1
-!s100 0^Aoz6?Mjm3?BQbk8YfF=1
-R6
-32
-Z39 !s110 1672338543
-!i10b 1
-Z40 !s108 1672338543.000000
-Z41 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2/generator_assembly_tester.vhd|
-Z42 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2/generator_assembly_tester.vhd|
-!i113 1
-Z43 o-work work -2002 -explicit
-R12
 Aa_generator_assembly
-R31
+R41
 R14
 R13
 R1
 R2
-R32
+R42
 l258
 L25
-Z44 VQ9YBcId5;SfD=CbRO7?4W0
-Z45 !s100 3TL>j79?1[Yd`LF9IAIz=0
+Z48 V:R56LM_>8Le[0TZnI86];0
+Z49 !s100 3TL>j79?1[Yd`LF9IAIz=0
 R6
-32
-R39
+33
+R28
 !i10b 1
-R40
-R41
-R42
+R29
+R46
+R47
 !i113 1
-R43
+R11
 R12
 Egenerator_generator
-R0
+Z50 w1671529716
 R14
 R13
 R1
 R2
 R3
-Z46 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_generator.vhd
-Z47 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_generator.vhd
+Z51 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_generator.vhd
+Z52 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_generator.vhd
 l0
 L7
 V4O@`HoJ9CN_VgJnHYW5f]1
 !s100 1`779KXMaSQ<k[SNk5akG1
 R6
 33
-R22
+R7
 !i10b 1
-R23
-Z48 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_generator.vhd|
-Z49 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_generator.vhd|
+R8
+Z53 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_generator.vhd|
+Z54 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_generator.vhd|
 !i113 1
 R11
 R12
@@ -265,43 +313,43 @@ V<8bzjAiO]^;aj0?D2cQ>P2
 !s100 4m5MRmU3eL4I5Pne9[jY62
 R6
 33
-R22
+R7
 !i10b 1
-R23
-R48
-R49
+R8
+R53
+R54
 !i113 1
 R11
 R12
 Egenerator_tb
-R0
-Z50 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+R50
+Z55 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
 R1
 R2
 R3
-Z51 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tb.vhd
-Z52 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tb.vhd
+Z56 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tb.vhd
+Z57 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tb.vhd
 l0
 L5
 Vd0JnX4K1Zn2]9Wa_TaF9I3
 !s100 ;8E8ghi45DRH]agDnUmn82
 R6
 33
-R22
+R7
 !i10b 1
-R23
-Z53 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tb.vhd|
-Z54 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tb.vhd|
+R8
+Z58 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tb.vhd|
+Z59 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tb.vhd|
 !i113 1
 R11
 R12
 Abench
-R31
-Z55 DEx4 work 16 generator_tester 0 22 10[BN<2ZJ2MURi>aU[CQ_1
-R19
+R41
+Z60 DEx4 work 16 generator_tester 0 22 10[BN<2ZJ2MURi>aU[CQ_1
+R20
 R13
 R34
-R50
+R55
 R1
 R2
 DEx4 work 12 generator_tb 0 22 d0JnX4K1Zn2]9Wa_TaF9I3
@@ -311,84 +359,84 @@ VB3nonjCS=`ckR1M8QoC=P3
 !s100 8FQJHQY;?8aShn_AS8Wnc0
 R6
 33
-R22
+R7
 !i10b 1
-R23
-R53
-R54
+R8
+R58
+R59
 !i113 1
 R11
 R12
 Egenerator_tester
-R0
-R31
-R19
+R50
+R41
+R20
 R13
 R1
 R2
 R3
-Z56 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tester.vhd
-Z57 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tester.vhd
+Z61 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tester.vhd
+Z62 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tester.vhd
 l0
 L9
 V10[BN<2ZJ2MURi>aU[CQ_1
 !s100 TN5nMIOoK7>SXBM1`KAYI1
 R6
 33
-R39
+R7
 !i10b 1
-R40
-Z58 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tester.vhd|
-Z59 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tester.vhd|
+R8
+Z63 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tester.vhd|
+Z64 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_tester.vhd|
 !i113 1
 R11
 R12
 Aa_generator_tester
-R31
-R19
+R41
+R20
 R13
 R1
 R2
-R55
+R60
 l32
 L21
 VnH0zK[<L:d_VU>[N>N<Ii3
 !s100 lG7AE24Z6DKzW>aL=S1=00
 R6
 33
-R39
+R7
 !i10b 1
-R40
-R58
-R59
+R8
+R63
+R64
 !i113 1
 R11
 R12
 Egenerator_top
-R0
-R19
+R50
+R20
 R13
 R1
 R2
 R3
-Z60 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd
-Z61 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd
+Z65 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd
+Z66 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd
 l0
 L6
 Vk`GV9:RY<CMM5IPfEd:@l1
 !s100 5eRhi7n[i?k>JS]LmV@O22
 R6
 33
-R39
+R28
 !i10b 1
-R40
-Z62 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd|
-Z63 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd|
+R8
+Z67 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd|
+Z68 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd|
 !i113 1
 R11
 R12
 Aa_generator_top
-R19
+R20
 R13
 R1
 R2
@@ -399,21 +447,21 @@ VaQh8PAZ1Ajiid80j3Tdfi0
 !s100 >I;a??faGAz7m9;SgnI783
 R6
 33
-R39
+R28
 !i10b 1
-R40
-R62
-R63
+R8
+R67
+R68
 !i113 1
 R11
 R12
 Egsmregister
-R0
+Z69 w1672339450
 R1
 R2
 R3
-Z64 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd
-Z65 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd
+Z70 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd
+Z71 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd
 l0
 L4
 VMM2kUThU<^?Fkg<QY?VOk2
@@ -423,8 +471,8 @@ R6
 R7
 !i10b 1
 R8
-Z66 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd|
-Z67 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd|
+Z72 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd|
+Z73 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd|
 !i113 1
 R11
 R12
@@ -441,18 +489,18 @@ R6
 R7
 !i10b 1
 R8
-R66
-R67
+R72
+R73
 !i113 1
 R11
 R12
 Egsmregistr_fifo
-R0
+Z74 w1671967823
 R1
 R2
 R3
-Z68 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_FIFO.vhd
-Z69 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_FIFO.vhd
+Z75 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_FIFO.vhd
+Z76 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_FIFO.vhd
 l0
 L42
 VJXIeM2UgO3EJ_9=V8dlH61
@@ -462,8 +510,8 @@ R6
 R7
 !i10b 1
 R8
-Z70 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_FIFO.vhd|
-Z71 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_FIFO.vhd|
+Z77 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_FIFO.vhd|
+Z78 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_FIFO.vhd|
 !i113 1
 R11
 R12
@@ -480,18 +528,18 @@ R6
 R7
 !i10b 1
 R8
-R70
-R71
+R77
+R78
 !i113 1
 R11
 R12
 Egsmregistr_tester
-R0
+R69
 R1
 R2
 R3
-Z72 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tester.vhd
-Z73 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tester.vhd
+Z79 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tester.vhd
+Z80 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tester.vhd
 l0
 L3
 Vb:;23NjbL0A>TnS89LL550
@@ -501,8 +549,8 @@ R6
 R7
 !i10b 1
 R8
-Z74 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tester.vhd|
-Z75 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tester.vhd|
+Z81 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tester.vhd|
+Z82 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tester.vhd|
 !i113 1
 R11
 R12
@@ -519,29 +567,29 @@ R6
 R7
 !i10b 1
 R8
-R74
-R75
+R81
+R82
 !i113 1
 R11
 R12
 Egsmregistr_top
-Z76 w1672302617
+R69
 R1
 R2
 R3
-Z77 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_top.vhd
-Z78 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_top.vhd
+Z83 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_top.vhd
+Z84 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_top.vhd
 l0
 L5
-VF_[Veg=6GibaCDeG:GMPj1
-!s100 SB6[P:^DhEe;kX>fJT2PO2
+Vo1HkA0^ZBc^SKmVEM@JE91
+!s100 3V=flJ>3cYFm<a5_9bcg>3
 R6
 33
 R7
 !i10b 1
 R8
-Z79 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_top.vhd|
-Z80 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_top.vhd|
+Z85 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_top.vhd|
+Z86 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_top.vhd|
 !i113 1
 R11
 R12
@@ -551,25 +599,25 @@ R2
 R33
 l77
 L34
-VI?cm9?Q=kL_kXPHAEGJHk2
-!s100 4FQBDMJYl4T8UZ2TjAlQR0
+VGcGmH2dLnY`KMULYDH;A93
+!s100 eJNfY7=NXlhQMOFWOHzc:2
 R6
 33
 R7
 !i10b 1
 R8
-R79
-R80
+R85
+R86
 !i113 1
 R11
 R12
 Egsmregistr_top_tb
-R0
+R69
 R1
 R2
 R3
-Z81 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tb.vhd
-Z82 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tb.vhd
+Z87 8D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tb.vhd
+Z88 FD:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tb.vhd
 l0
 L4
 Voz;dF]bNPnOZbdMi:0WHA1
@@ -579,8 +627,8 @@ R6
 R7
 !i10b 1
 R8
-Z83 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tb.vhd|
-Z84 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tb.vhd|
+Z89 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tb.vhd|
+Z90 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr_tb.vhd|
 !i113 1
 R11
 R12
@@ -597,38 +645,38 @@ R6
 R7
 !i10b 1
 R8
-R83
-R84
+R89
+R90
 !i113 1
 R11
 R12
 Emodulator
-Z85 w1672290855
+Z91 w1672290855
 R14
-R19
+R20
 R13
 R1
 R2
 R3
-Z86 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator.vhd
-Z87 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator.vhd
+Z92 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator.vhd
+Z93 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator.vhd
 l0
 L7
 VL49Q3E[2L[7O`b1XgZk;22
 !s100 7ODR2KR46aM2fBCTCD4Bo2
 R6
 33
-R22
+R7
 !i10b 1
 R8
-Z88 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator.vhd|
-Z89 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator.vhd|
+Z94 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator.vhd|
+Z95 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator.vhd|
 !i113 1
 R11
 R12
 Aa_modulator
 R14
-R19
+R20
 R13
 R1
 R2
@@ -639,79 +687,79 @@ V?8haMBKKQ1XZUA[f9BSRT2
 !s100 A]ZBPlfRn8UZU]3?mjnGK3
 R6
 33
-R22
+R7
 !i10b 1
 R8
-R88
-R89
+R94
+R95
 !i113 1
 R11
 R12
 Emodulator_8b10
-Z90 w1672334761
+Z96 w1673339137
 R14
-R19
+R20
 R13
 R1
 R2
 R3
-Z91 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_8b10.vhd
-Z92 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_8b10.vhd
+Z97 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_8b10.vhd
+Z98 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_8b10.vhd
 l0
 L7
 V^fn<2F9jQQZlj6jkbnzok3
 !s100 XZ8i1B<a`3?QNFQYPAET<1
 R6
 33
-R22
+R7
 !i10b 1
-R23
-Z93 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_8b10.vhd|
-Z94 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_8b10.vhd|
+R8
+Z99 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_8b10.vhd|
+Z100 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_8b10.vhd|
 !i113 1
 R11
 R12
 Aa_modulator_8b10
 R14
-R19
+R20
 R13
 R1
 R2
 DEx4 work 14 modulator_8b10 0 22 ^fn<2F9jQQZlj6jkbnzok3
 l56
 L23
-V_LNfMQG:JohMO78Y`[3]c0
-!s100 FMQ?>ekiaGY11TIRj@00H3
+VaLlLjI6O:Y3iY11?TE6k81
+!s100 hMjGPGQh@ei@fdSTCUFXD2
 R6
 33
-R22
+R7
 !i10b 1
-R23
-R93
-R94
+R8
+R99
+R100
 !i113 1
 R11
 R12
 Emodulator_lut
-Z95 w1671967203
+Z101 w1671967203
 R13
 R14
 R1
 R2
 R3
-Z96 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_lut.vhd
-Z97 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_lut.vhd
+Z102 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_lut.vhd
+Z103 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_lut.vhd
 l0
 L5
 VDMiK@oZ<fh^5VFD5b9XC02
 !s100 VTZRNFEIJAc`[eG:f1JAn2
 R6
 33
-R22
+R7
 !i10b 1
-R23
-Z98 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_lut.vhd|
-Z99 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_lut.vhd|
+R8
+Z104 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_lut.vhd|
+Z105 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_lut.vhd|
 !i113 1
 R11
 R12
@@ -727,34 +775,34 @@ VKX50J@D7N0:A3fEe<3J730
 !s100 ^?C_z:Z6b3iW2ZJbPeX:A3
 R6
 33
-R22
+R7
 !i10b 1
-R23
-R98
-R99
+R8
+R104
+R105
 !i113 1
 R11
 R12
 Emodulator_modulation
-Z100 w1672298032
+Z106 w1672298032
 R14
 R13
 R1
 R2
 R3
-Z101 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation.vhd
-Z102 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation.vhd
+Z107 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation.vhd
+Z108 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation.vhd
 l0
 L25
 Vhb8UTiU9gN_UXni?SP1CX2
 !s100 FhoR97;WfU3g8P=_ILojG2
 R6
 33
-R22
+R7
 !i10b 1
-R23
-Z103 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation.vhd|
-Z104 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation.vhd|
+R8
+Z109 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation.vhd|
+Z110 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation.vhd|
 !i113 1
 R11
 R12
@@ -770,34 +818,34 @@ Vz:QfdbGNX]IfWCbm2Tk[X2
 !s100 LW?hXWA56R3nQUUKJMG?92
 R6
 33
-R22
+R7
 !i10b 1
-R23
-R103
-R104
+R8
+R109
+R110
 !i113 1
 R11
 R12
 Emodulator_modulation_tb
-R0
+Z111 w1672299098
 R13
 R14
 R1
 R2
-R3
-Z105 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tb.vhd
-Z106 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tb.vhd
+Z112 dD:/FPGA/lab2/FunctionalSignalGenerator/generator_assembly2
+Z113 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tb.vhd
+Z114 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tb.vhd
 l0
 L6
 V8Z<__Z^3c?g8S?G4AGQm93
 !s100 QY<MRhDbcBOJG4_lzBh7]0
 R6
 33
-R22
+Z115 !s110 1672338541
 !i10b 1
-R23
-Z107 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tb.vhd|
-Z108 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tb.vhd|
+Z116 !s108 1672338541.000000
+Z117 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tb.vhd|
+Z118 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tb.vhd|
 !i113 1
 R11
 R12
@@ -813,40 +861,40 @@ VXUkU_>MT]V5hl8>2=NHef1
 !s100 azJV<9@PEUMh_`=5K@LDo2
 R6
 33
-R22
+R115
 !i10b 1
-R23
-R107
-R108
+R116
+R117
+R118
 !i113 1
 R11
 R12
 Emodulator_modulation_tester
-R0
-R31
+R111
+R41
 R14
 R13
 R1
 R2
-R3
-Z109 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tester.vhd
-Z110 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tester.vhd
+R112
+Z119 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tester.vhd
+Z120 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tester.vhd
 l0
 L10
 VzK_kPa4MjC:e88m]^1^=23
 !s100 jkThf`c679<d7DfOzoI7[0
 R6
 33
-R22
+R115
 !i10b 1
-R23
-Z111 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tester.vhd|
-Z112 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tester.vhd|
+R116
+Z121 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tester.vhd|
+Z122 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_modulation_tester.vhd|
 !i113 1
 R11
 R12
 Aa_modulator_modulation_tester
-R31
+R41
 R14
 R13
 R1
@@ -858,41 +906,41 @@ VK[TooU]Z;TlXdIXRUZKgh3
 !s100 jJbk>nEoRa1HFFW7gNci01
 R6
 33
-R22
+R115
 !i10b 1
-R23
-R111
-R112
+R116
+R121
+R122
 !i113 1
 R11
 R12
 Emodulator_tb
-Z113 w1672291220
+Z123 w1672291220
 R14
-R19
+R20
 R13
 R1
 R2
 R3
-Z114 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tb.vhd
-Z115 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tb.vhd
+Z124 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tb.vhd
+Z125 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tb.vhd
 l0
 L7
 VI8J>`SjY4D?:@6E4VL0>m2
 !s100 [>Jn]AShjVnFO57fkZRIM2
 R6
 33
-R22
+R7
 !i10b 1
-R23
-Z116 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tb.vhd|
-Z117 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tb.vhd|
+R8
+Z126 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tb.vhd|
+Z127 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tb.vhd|
 !i113 1
 R11
 R12
 Aa_modulator_tb
 R14
-R19
+R20
 R13
 R1
 R2
@@ -903,40 +951,40 @@ VO[@j=c_dzQ3E977hEjied3
 !s100 J6dH:__JiLF9ekzjA]FQ81
 R6
 33
-R22
+R7
 !i10b 1
-R23
-R116
-R117
+R8
+R126
+R127
 !i113 1
 R11
 R12
 Emodulator_tester
-Z118 w1672335538
-R31
+Z128 w1672335538
+R41
 R14
 R13
 R1
 R2
 R3
-Z119 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tester.vhd
-Z120 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tester.vhd
+Z129 8D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tester.vhd
+Z130 FD:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tester.vhd
 l0
 L9
 VG>hJZX[zh=]>_SI>8GN7:1
 !s100 nVSR`cYKO5:6SMXcO3?lO1
 R6
 33
-R22
+R7
 !i10b 1
-R23
-Z121 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tester.vhd|
-Z122 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tester.vhd|
+R8
+Z131 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tester.vhd|
+Z132 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/modulator_tester.vhd|
 !i113 1
 R11
 R12
 Aa_modulator_tester
-R31
+R41
 R14
 R13
 R1
@@ -948,39 +996,39 @@ VFMi?lA_8Dff[VS3N]VJ262
 !s100 K[fhWooi6VogIW12CcIKL2
 R6
 33
-R22
+R7
 !i10b 1
-R23
-R121
-R122
+R8
+R131
+R132
 !i113 1
 R11
 R12
 Esin_generator
-R0
-R19
+R50
+R20
 R13
 R1
 R2
 R3
-Z123 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd
-Z124 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd
+Z133 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd
+Z134 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd
 l0
 L7
 VdoRc8JYHDYnV`OY;8XMZM0
 !s100 C_RTJY45f4LbzVz^G1Q1a0
 R6
 33
-R39
+R28
 !i10b 1
-R40
-Z125 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd|
-Z126 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd|
+R29
+Z135 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd|
+Z136 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd|
 !i113 1
 R11
 R12
 Aa_sin_generator
-R19
+R20
 R13
 R1
 R2
@@ -991,41 +1039,41 @@ VJfoY9h5NTAQRNW1cWgJL]1
 !s100 fg:g@9E[N:iOIP`b[MdX60
 R6
 33
-R39
+R28
 !i10b 1
-R40
-R125
-R126
+R29
+R135
+R136
 !i113 1
 R11
 R12
 Esin_lut
-R0
+R50
 R14
-R19
+R20
 R13
 R1
 R2
 R3
-Z127 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_lut.vhd
-Z128 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_lut.vhd
+Z137 8D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_lut.vhd
+Z138 FD:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_lut.vhd
 l0
 L7
 VEnQE11ooMMEz^K^f=lJ:h0
 !s100 N6]@hD3H;6FE<J3RUjaS]1
 R6
 33
-R39
+R28
 !i10b 1
-R40
-Z129 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_lut.vhd|
-Z130 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_lut.vhd|
+R29
+Z139 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_lut.vhd|
+Z140 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_lut.vhd|
 !i113 1
 R11
 R12
 Aa_sin_lut
 R14
-R19
+R20
 R13
 R1
 R2
@@ -1036,11 +1084,11 @@ V7hBXgfa@:Aj91?QnC4WLI1
 !s100 ;Bh?jUEiVEO7i>E_Z[U4@1
 R6
 33
-R39
+R28
 !i10b 1
-R40
-R129
-R130
+R29
+R139
+R140
 !i113 1
 R11
 R12

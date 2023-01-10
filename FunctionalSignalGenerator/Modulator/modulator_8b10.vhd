@@ -60,8 +60,8 @@ begin
         SBYTECLK => clk,
 
         KI => '0', -- Control (K) input(active high)
-        BI => DataIn_r(0),
-        AI => DataIn_r(1),
+        AI => DataIn_r(0),
+        BI => DataIn_r(1),
         CI => DataIn_r(2),
         DI => DataIn_r(3),
         EI => DataIn_r(4),
@@ -69,16 +69,16 @@ begin
         GI => DataIn_r(6),
         HI => DataIn_r(7),
 
-        JO => DataOut_r(9),
-        HO => DataOut_r(8),
-        GO => DataOut_r(7),
-        FO => DataOut_r(6),
-        IO => DataOut_r(5),
-        EO => DataOut_r(4),
-        DO => DataOut_r(3),
-        CO => DataOut_r(2),
+        AO => DataOut_r(0),
         BO => DataOut_r(1),
-        AO => DataOut_r(0)
+        CO => DataOut_r(2),
+        DO => DataOut_r(3),
+        EO => DataOut_r(4),
+        IO => DataOut_r(5),
+        FO => DataOut_r(6),
+        GO => DataOut_r(7),
+        HO => DataOut_r(8),
+        JO => DataOut_r(9)
     );
 
     con_p: process (clk, nRst)
