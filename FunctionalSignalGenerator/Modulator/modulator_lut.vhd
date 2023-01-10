@@ -17,8 +17,8 @@ architecture a_modulator_lut of modulator_lut is
 
     constant lut_start_phase : int_array := (
         0 => X"A000",
-        1 => X"E000", --
-        2 => X"6000", --
+        1 => X"6000", --
+        2 => X"E000", --
         3 => X"2000", --
 
         16 => X"A000",
