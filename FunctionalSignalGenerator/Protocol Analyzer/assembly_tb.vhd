@@ -63,20 +63,6 @@ begin
 			data_output =>	data_output,
 			wrreq_output => wrreq_output	 
     );
-
-    GSMRegistr_tester_inst : GSMRegistr_tester
-    port map (
-        WB_Addr=> WB_Addr,
-        clk => clk,
-        WB_DataIn => WB_DataIn,
-        nRst => nRst,
-        WB_Sel=> WB_Sel,
-        WB_STB => WB_STB,
-        WB_WE => WB_WE,
-		WB_Cyc_0 => WB_Cyc_0,
-		WB_Cyc_2 => WB_Cyc_2,
-        rdreq => rdreq
-    );
 	 assembly_tester_inst : assembly_tester
 	  port map (
 			Clk => Clk,
