@@ -8,7 +8,8 @@ entity GSMRegistr_top is
         WB_Ack: out std_logic;
         Clk: in std_logic;
         WB_DataIn: in std_logic_vector( 15 downto 0 );
-        WB_DataOut: out std_logic_vector( 15 downto 0 );
+        WB_DataOut_0: out std_logic_vector( 15 downto 0 );
+		  WB_DataOut_2: out std_logic_vector( 15 downto 0 );
         nRst: in std_logic;
         WB_Sel: in std_logic_vector( 1 downto 0 );
         WB_STB: in std_logic;
@@ -17,7 +18,7 @@ entity GSMRegistr_top is
 		  WB_Cyc_2		: in	std_logic;
 		  WB_CTI		: in	std_logic_vector(2 downto 0);
     
-        PRT_O: out std_logic_vector( 15 downto 0 ); --Ð´Ð°Ð½Ð½ÑÐµ Ð´Ð»Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²Ð°Ð½Ð¸Ñ Ð¸ Ð¼Ð¾Ð´ÑÐ»ÑÑÐ¸Ð¸
+        PRT_O: out std_logic_vector( 15 downto 0 ); --данные для кодирования и модуляции
 --        Amplitude_OUT: out std_logic_vector( 15 downto 0);
 --       StartPhase_OUT: out std_logic_vector( 15 downto 0);
         CarrierFrequency_OUT: out std_logic_vector(31 downto 0);
@@ -53,7 +54,8 @@ architecture rtl of GSMRegistr_top is
 		
 		--Wishbone
 		WB_Addr		: in	std_logic_vector( 15 downto 0 );
-		WB_DataOut	: out	std_logic_vector( 15 downto 0 );
+		WB_DataOut_0	: out	std_logic_vector( 15 downto 0 );
+		WB_DataOut_2	: out	std_logic_vector( 15 downto 0 );
 		WB_DataIn	: in	std_logic_vector( 15 downto 0 );
 		WB_WE			: in 	std_logic;
 		WB_Sel		: in 	std_logic_vector( 1 downto 0 );
@@ -63,12 +65,12 @@ architecture rtl of GSMRegistr_top is
 		WB_Ack		: out std_logic;
 		WB_CTI		: in	std_logic_vector(2 downto 0);
 
-		PRT_O						: out 	std_logic_vector( 15 downto 0 ); --Ð´Ð°Ð½Ð½ÑÐµ Ð´Ð»Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²Ð°Ð½Ð¸Ñ Ð¸ Ð¼Ð¾Ð´ÑÐ»ÑÑÐ¸Ð¸
+		PRT_O						: out 	std_logic_vector( 15 downto 0 ); --данные для кодирования и модуляции
 --		Amplitude_OUT			: out 	std_logic_vector( 15 downto 0);
 --		StartPhase_OUT			: out 	std_logic_vector( 15 downto 0);
 		CarrierFrequency_OUT	: out 	std_logic_vector(31 downto 0);
 		SymbolFrequency_OUT	: out 	std_logic_vector( 31 downto 0);
-		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--Ð¸Ð´ÐµÑ Ð² FIFO
+		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--идет в FIFO
 		wrreq						: out 	std_logic;
 		full : in std_logic
 	);
@@ -83,13 +85,14 @@ begin
         clk => clk,
         nRst => nRst,
         WB_Addr => WB_Addr,
-        WB_DataOut => WB_DataOut,
+        WB_DataOut_0 => WB_DataOut_0,
+		  WB_DataOut_2 => WB_DataOut_2,
         WB_DataIn => WB_DataIn,
         WB_WE => WB_WE,
         WB_Sel => WB_Sel,
         WB_STB => WB_STB,
         WB_Cyc_0 => WB_Cyc_0,
-		  WB_Cyc_2 => WB_Cyc_2,
+	WB_Cyc_2 => WB_Cyc_2,
         WB_Ack => WB_Ack,
         WB_CTI => WB_CTI,
         PRT_O => PRT_O,
