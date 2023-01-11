@@ -62,7 +62,7 @@ begin
 			
 				if ((WB_STB and WB_Cyc_2) = '1') then
 					if(Ack_r = '0') then
-						if (WB_Addr = x"020C")then
+						if (WB_Addr = x"000C")then
 						   if (full = '0') then
 						     Ack_r <= '1';
 						   end if;
@@ -83,7 +83,7 @@ begin
 				end if;
 				--
 				
-				if (WB_Cyc_2 = '1' and WB_WE = '1' and WB_STB = '1' and WB_Addr = x"020C") then
+				if (WB_Cyc_2 = '1' and WB_WE = '1' and WB_STB = '1' and WB_Addr = x"000C") then
 					if (full = '0') then
 						wrreq_r <= '1';
 					else
