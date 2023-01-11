@@ -17,7 +17,7 @@ entity GSMRegistr_top is
 		  WB_Cyc_2		: in	std_logic;
 		  WB_CTI		: in	std_logic_vector(2 downto 0);
     
-        PRT_O: out std_logic_vector( 15 downto 0 ); --данные для кодирования и модуляции
+        PRT_O: out std_logic_vector( 15 downto 0 ); --Ð´Ð°Ð½Ð½ÑÐµ Ð´Ð»Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²Ð°Ð½Ð¸Ñ Ð¸ Ð¼Ð¾Ð´ÑÐ»ÑÑÐ¸Ð¸
 --        Amplitude_OUT: out std_logic_vector( 15 downto 0);
 --       StartPhase_OUT: out std_logic_vector( 15 downto 0);
         CarrierFrequency_OUT: out std_logic_vector(31 downto 0);
@@ -63,12 +63,12 @@ architecture rtl of GSMRegistr_top is
 		WB_Ack		: out std_logic;
 		WB_CTI		: in	std_logic_vector(2 downto 0);
 
-		PRT_O						: out 	std_logic_vector( 15 downto 0 ); --данные для кодирования и модуляции
+		PRT_O						: out 	std_logic_vector( 15 downto 0 ); --Ð´Ð°Ð½Ð½ÑÐµ Ð´Ð»Ñ ÐºÐ¾Ð´Ð¸ÑÐ¾Ð²Ð°Ð½Ð¸Ñ Ð¸ Ð¼Ð¾Ð´ÑÐ»ÑÑÐ¸Ð¸
 --		Amplitude_OUT			: out 	std_logic_vector( 15 downto 0);
 --		StartPhase_OUT			: out 	std_logic_vector( 15 downto 0);
 		CarrierFrequency_OUT	: out 	std_logic_vector(31 downto 0);
 		SymbolFrequency_OUT	: out 	std_logic_vector( 31 downto 0);
-		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--идет в FIFO
+		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--Ð¸Ð´ÐµÑ Ð² FIFO
 		wrreq						: out 	std_logic;
 		full : in std_logic
 	);
@@ -89,7 +89,7 @@ begin
         WB_Sel => WB_Sel,
         WB_STB => WB_STB,
         WB_Cyc_0 => WB_Cyc_0,
-	WB_Cyc_2 => WB_Cyc_2,
+		  WB_Cyc_2 => WB_Cyc_2,
         WB_Ack => WB_Ack,
         WB_CTI => WB_CTI,
         PRT_O => PRT_O,
