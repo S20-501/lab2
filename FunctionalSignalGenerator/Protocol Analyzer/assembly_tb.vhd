@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity GSMRegistr_top_tb is
+entity assembly_tb is
 end;
 
 architecture bench of assembly_tb is
@@ -28,7 +28,7 @@ architecture bench of assembly_tb is
     
 			q_input 			: out std_logic_vector (15 downto 0);
 			usedw_input_fi : out std_logic_vector (10 downto 0);
-			usedw_input_fo : out std_logic_vector (10 downto 0);
+			usedw_input_fo : out std_logic_vector (10 downto 0)
     );
     end component;
 
@@ -44,7 +44,7 @@ architecture bench of assembly_tb is
 	signal usedw_input_fo :  std_logic_vector (10 downto 0);
 	signal rdreq_output 	: std_logic;
 	signal data_output 	:  std_logic_vector (15 downto 0);
-	signal wrreq_output 	:  std_logic
+	signal wrreq_output 	:  std_logic;
   -- Ports
 
 
