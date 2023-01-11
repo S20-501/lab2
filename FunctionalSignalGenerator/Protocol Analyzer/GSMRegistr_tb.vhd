@@ -28,8 +28,8 @@ architecture bench of GSMRegistr_top_tb is
       rdreq : in STD_LOGIC;
       empty : out STD_LOGIC;
       full : out STD_LOGIC;
-      q : out STD_LOGIC_VECTOR (15 DOWNTO 0);
-      usedw : out STD_LOGIC_VECTOR (9 DOWNTO 0)
+      q : out STD_LOGIC_VECTOR (15 DOWNTO 0)
+ --     usedw : out STD_LOGIC_VECTOR (9 DOWNTO 0)
     );
   end component;
 
@@ -75,7 +75,7 @@ architecture bench of GSMRegistr_top_tb is
   signal empty : STD_LOGIC;
   signal full : STD_LOGIC;
   signal q : STD_LOGIC_VECTOR (15 DOWNTO 0);
-  signal usedw : STD_LOGIC_VECTOR (9 DOWNTO 0);
+--  signal usedw : STD_LOGIC_VECTOR (9 DOWNTO 0);
 
 begin
 
@@ -102,8 +102,8 @@ begin
       rdreq => rdreq,
       empty => empty,
       full => full,
-      q => q,
-      usedw => usedw
+      q => q
+--      usedw => usedw
     );
 
     GSMRegistr_tester_inst : GSMRegistr_tester
