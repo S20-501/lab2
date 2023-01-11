@@ -14,7 +14,8 @@ entity GSMRegister is
 		WB_WE			: in 	std_logic;
 		WB_Sel		: in 	std_logic_vector( 1 downto 0 );
 		WB_STB		: in 	std_logic;
-		WB_Cyc		: in	std_logic;
+		WB_Cyc_0		: in	std_logic;
+		WB_Cyc_2		: in	std_logic;
 		WB_Ack		: out std_logic;
 		WB_CTI		: in	std_logic_vector(2 downto 0);
 
@@ -41,7 +42,7 @@ architecture Behavior of GSMRegister is
 	signal wrreq_r: std_logic;
 begin
 		
-		process(clk,nRst, WB_STB, WB_WE, WB_Cyc)
+		process(clk,nRst, WB_STB, WB_WE, WB_Cyc_0, WB_Cyc_2)
 		begin
 			if (nRst = '0') then
 				QH_r <= x"00";
@@ -56,7 +57,7 @@ begin
 				WB_DataOut_r <= "0000000000000000";
 			elsif (rising_edge(clk)) then
 			
-				if ((WB_STB and WB_Cyc) = '1') then
+				if ((WB_STB and WB_Cyc_2) = '1') then
 					if(Ack_r = '0') then
 						if (WB_Addr = x"020C")then
 						   if (full = '0') then
@@ -68,12 +69,18 @@ begin
 					else
 						Ack_r <= '0';
 					end if;
+				elsif ((WB_STB and WB_Cyc_0) = '1') then
+					if (Ack_r = '0') then
+						Ack_r <= '1';
+					else
+						Ack_r <= '0';
+					end if;
 				else
 					Ack_r <= '0';
 				end if;
 				--
 				
-				if (WB_Cyc = '1' and WB_WE = '1' and WB_STB = '1' and WB_Addr = x"020C") then
+				if (WB_Cyc_2 = '1' and WB_WE = '1' and WB_STB = '1' and WB_Addr = x"020C") then
 					if (full = '0') then
 						wrreq_r <= '1';
 					else
@@ -83,52 +90,51 @@ begin
 					wrreq_r <= '0';
 				end if;
 				
-			if (WB_Cyc = '1') then 
-				if(WB_WE = '1' and WB_STB = '1') then
-					if(WB_Addr = x"0000") then
-						if(WB_Sel(1) = '1')then
-							QH_r <= WB_DataIn( 15 downto 8 );
+				if (WB_Cyc_0 = '1') then 
+					if(WB_WE = '1' and WB_STB = '1') then
+						if(WB_Addr = x"0000") then
+							if(WB_Sel(1) = '1')then
+								QH_r <= WB_DataIn( 15 downto 8 );
+							end if;
+							if(WB_Sel(0) = '1') then
+								QL_r <= WB_DataIn( 7 downto 0 );
+							end if;
 						end if;
-						if(WB_Sel(0) = '1') then
-							QL_r <= WB_DataIn( 7 downto 0 );
-						end if;
---					elsif(WB_Addr = x"0200") then
---						Amplitude_r <= WB_DataIn;
---					elsif(WB_Addr = x"0202") then
---						Start_Phase_r <= WB_DataIn;
-					elsif(WB_Addr = x"0204") then
-						Carrier_Frequency_r( 31 downto 16 ) <= WB_DataIn;
-					elsif(WB_Addr = x"0206") then
-						Carrier_Frequency_r( 15 downto 0 ) <= WB_DataIn;
-					elsif(WB_Addr = x"0208") then
-						Symbol_Frequency_r( 31 downto 16 ) <= WB_DataIn;
-					elsif(WB_Addr = x"020A") then
-						Symbol_Frequency_r( 15 downto 0 ) <= WB_DataIn;
-					elsif(WB_Addr = x"020C") then
-						if (full = '0')then
-							DataPort_r <= WB_DataIn;
+					elsif(WB_WE = '0' and WB_STB = '1') then
+						if(WB_Addr = x"0000") then
+							WB_DataOut_r( 15 downto 0 ) <= QH_r & QL_r;
 						end if;
 					end if;
-				elsif(WB_WE = '0' and WB_STB = '1') then
-					if(WB_Addr = x"0000") then
-						WB_DataOut_r( 15 downto 0 ) <= QH_r & QL_r;
---					elsif(WB_Addr = x"0200") then
---						WB_DataOut_r <= Amplitude_r;
---					elsif(WB_Addr = x"0202") then
---						WB_DataOut_r <= Start_Phase_r;
-					elsif(WB_Addr = x"0204") then
-						WB_DataOut_r <= Carrier_Frequency_r( 31 downto 16 );
-					elsif(WB_Addr = x"0206") then
-						WB_DataOut_r <= Carrier_Frequency_r( 15 downto 0 );
-					elsif(WB_Addr = x"0208") then
-						WB_DataOut_r <= Symbol_Frequency_r( 31 downto 16 );
-					elsif(WB_Addr = x"020A") then
-						WB_DataOut_r <= Symbol_Frequency_r( 15 downto 0 );
-					elsif(WB_Addr = x"020C") then
-						WB_DataOut_r <= DataPort_r;
+					--
+				elsif (WB_Cyc_2 = '1') then
+					if(WB_WE = '1' and WB_STB = '1') then
+						if(WB_Addr = x"0004") then
+							Carrier_Frequency_r( 31 downto 16 ) <= WB_DataIn;
+						elsif(WB_Addr = x"0006") then
+							Carrier_Frequency_r( 15 downto 0 ) <= WB_DataIn;
+						elsif(WB_Addr = x"0008") then
+							Symbol_Frequency_r( 31 downto 16 ) <= WB_DataIn;
+						elsif(WB_Addr = x"000A") then
+							Symbol_Frequency_r( 15 downto 0 ) <= WB_DataIn;
+						elsif(WB_Addr = x"000C") then
+							if (full = '0')then
+								DataPort_r <= WB_DataIn;
+							end if;
+						end if;
+					elsif(WB_WE = '0' and WB_STB = '1') then
+						if(WB_Addr = x"0004") then
+							WB_DataOut_r <= Carrier_Frequency_r( 31 downto 16 );
+						elsif(WB_Addr = x"0006") then
+							WB_DataOut_r <= Carrier_Frequency_r( 15 downto 0 );
+						elsif(WB_Addr = x"0008") then
+							WB_DataOut_r <= Symbol_Frequency_r( 31 downto 16 );
+						elsif(WB_Addr = x"000A") then
+							WB_DataOut_r <= Symbol_Frequency_r( 15 downto 0 );
+						elsif(WB_Addr = x"000C") then
+							WB_DataOut_r <= DataPort_r;
+						end if;
 					end if;
 				end if;
-			end if;
 			end if;
 		end process;
  	PRT_O( 15 downto 0 ) <= QH_r & QL_r;
