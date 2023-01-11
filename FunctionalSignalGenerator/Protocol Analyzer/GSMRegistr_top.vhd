@@ -13,7 +13,8 @@ entity GSMRegistr_top is
         WB_Sel: in std_logic_vector( 1 downto 0 );
         WB_STB: in std_logic;
         WB_WE: in std_logic;
-		  WB_Cyc		: in	std_logic;
+		  WB_Cyc_0		: in	std_logic;
+		  WB_Cyc_2		: in	std_logic;
 		  WB_CTI		: in	std_logic_vector(2 downto 0);
     
         PRT_O: out std_logic_vector( 15 downto 0 ); --данные для кодирования и модуляции
@@ -23,11 +24,11 @@ entity GSMRegistr_top is
         SymbolFrequency_OUT: out std_logic_vector( 31 downto 0);
         
         
-	rdreq		: IN STD_LOGIC ;
-	empty		: OUT STD_LOGIC ;
-	full		: OUT STD_LOGIC ;
-	q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0);
-	usedw		: OUT STD_LOGIC_VECTOR (9 DOWNTO 0)
+		rdreq		: IN STD_LOGIC ;
+		empty		: OUT STD_LOGIC ;
+--	full		: OUT STD_LOGIC ;
+		q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+--	usedw		: OUT STD_LOGIC_VECTOR (9 DOWNTO 0)
     );
 end entity GSMRegistr_top;
 
@@ -40,8 +41,8 @@ architecture rtl of GSMRegistr_top is
         wrreq : in STD_LOGIC;
         empty : out STD_LOGIC;
         full : out STD_LOGIC;
-        q : out STD_LOGIC_VECTOR (15 DOWNTO 0);
-        usedw : out STD_LOGIC_VECTOR (9 DOWNTO 0)
+        q : out STD_LOGIC_VECTOR (15 DOWNTO 0)
+ --       usedw : out STD_LOGIC_VECTOR (9 DOWNTO 0)
       );
     end component;
     
@@ -57,7 +58,8 @@ architecture rtl of GSMRegistr_top is
 		WB_WE			: in 	std_logic;
 		WB_Sel		: in 	std_logic_vector( 1 downto 0 );
 		WB_STB		: in 	std_logic;
-		WB_Cyc		: in	std_logic;
+		WB_Cyc_0		: in	std_logic;
+		WB_Cyc_2		: in	std_logic;
 		WB_Ack		: out std_logic;
 		WB_CTI		: in	std_logic_vector(2 downto 0);
 
@@ -75,7 +77,7 @@ architecture rtl of GSMRegistr_top is
 	 signal full_r : std_logic := '0';
     signal DataPort_r: std_logic_vector( 15 downto 0 ) := (others=>'0');
 begin
-		full <= full_r;
+--		full <= full_r;
     GSMRegister_inst : GSMRegister
     port map (
         clk => clk,
@@ -86,7 +88,8 @@ begin
         WB_WE => WB_WE,
         WB_Sel => WB_Sel,
         WB_STB => WB_STB,
-        WB_Cyc => WB_Cyc,
+        WB_Cyc_0 => WB_Cyc_0,
+	WB_Cyc_2 => WB_Cyc_2,
         WB_Ack => WB_Ack,
         WB_CTI => WB_CTI,
         PRT_O => PRT_O,
@@ -108,7 +111,7 @@ begin
             wrreq => wrreq,
             empty => empty,
             full => full_r,
-            q => q,
-            usedw => usedw
+            q => q
+--            usedw => usedw
         );
 end architecture;
