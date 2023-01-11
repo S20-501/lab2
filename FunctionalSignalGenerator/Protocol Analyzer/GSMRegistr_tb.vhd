@@ -12,7 +12,8 @@ architecture bench of GSMRegistr_top_tb is
       WB_Ack : out std_logic;
       clk : in std_logic;
       WB_DataIn : in std_logic_vector( 15 downto 0 );
-      WB_DataOut : out std_logic_vector( 15 downto 0 );
+      WB_DataOut_0 : out std_logic_vector( 15 downto 0 );
+      WB_DataOut_2 : out std_logic_vector( 15 downto 0 );
       nRst : in std_logic;
       WB_Sel: in std_logic_vector( 1 downto 0 );
       WB_STB : in std_logic;
@@ -59,7 +60,8 @@ architecture bench of GSMRegistr_top_tb is
   signal WB_Ack : std_logic;
   signal clk : std_logic;
   signal WB_DataIn : std_logic_vector( 15 downto 0 );
-  signal WB_DataOut : std_logic_vector( 15 downto 0 );
+  signal WB_DataOut_0 : std_logic_vector( 15 downto 0 );
+  signal WB_DataOut_2 : std_logic_vector( 15 downto 0 );
   signal nRst : std_logic;
   signal WB_Sel: std_logic_vector( 1 downto 0 );
   signal WB_STB : std_logic;
@@ -86,13 +88,14 @@ begin
       WB_Ack => WB_Ack,
       clk => clk,
       WB_DataIn => WB_DataIn,
-      WB_DataOut => WB_DataOut,
+      WB_DataOut_0 => WB_DataOut_0,
+      WB_DataOut_2 => WB_DataOut_2,
       nRst => nRst,
       WB_Sel=> WB_Sel,
       WB_STB => WB_STB,
       WB_WE => WB_WE,
       WB_Cyc_0 => WB_Cyc_0,
-	  WB_Cyc_2 => WB_Cyc_2,
+      WB_Cyc_2 => WB_Cyc_2,
       WB_CTI => WB_CTI,
       PRT_O => PRT_O,
 --      Amplitude_OUT => Amplitude_OUT,
