@@ -18,7 +18,7 @@ architecture bench of GSMRegistr_top_tb is
       WB_STB : in std_logic;
       WB_WE : in std_logic;
       WB_Cyc_0: in std_logic;
-	  WB_Cyc_2: in std_logic;
+	WB_Cyc_2: in std_logic;
       WB_CTI: in std_logic_vector(2 downto 0);
       PRT_O : out std_logic_vector( 15 downto 0 );
 --      Amplitude_OUT : out std_logic_vector( 15 downto 0);
@@ -27,7 +27,7 @@ architecture bench of GSMRegistr_top_tb is
       SymbolFrequency_OUT : out std_logic_vector( 31 downto 0);
       rdreq : in STD_LOGIC;
       empty : out STD_LOGIC;
-      full : out STD_LOGIC;
+--      full : out STD_LOGIC;
       q : out STD_LOGIC_VECTOR (15 DOWNTO 0)
  --     usedw : out STD_LOGIC_VECTOR (9 DOWNTO 0)
     );
@@ -73,7 +73,7 @@ architecture bench of GSMRegistr_top_tb is
   signal SymbolFrequency_OUT : std_logic_vector( 31 downto 0);
   signal rdreq : STD_LOGIC;
   signal empty : STD_LOGIC;
-  signal full : STD_LOGIC;
+--  signal full : STD_LOGIC;
   signal q : STD_LOGIC_VECTOR (15 DOWNTO 0);
 --  signal usedw : STD_LOGIC_VECTOR (9 DOWNTO 0);
 
@@ -101,7 +101,7 @@ begin
       SymbolFrequency_OUT => SymbolFrequency_OUT,
       rdreq => rdreq,
       empty => empty,
-      full => full,
+--      full => full,
       q => q
 --      usedw => usedw
     );
