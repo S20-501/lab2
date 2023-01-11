@@ -7,11 +7,11 @@ entity assembly_tester is
     
 			q_input 			: out std_logic_vector (15 downto 0);
 			usedw_input_fi : out std_logic_vector (10 downto 0);
-			usedw_input_fo : out std_logic_vector (10 downto 0);
+			usedw_input_fo : out std_logic_vector (10 downto 0)
     );
 end entity assembly_tester;
 
-architecture rtl of assembly_tester_tester is
+architecture rtl of assembly_tester is
 	 constant clk_period: time := 16666667 fs;
     signal clk_r: std_logic := '0';
 
@@ -30,6 +30,11 @@ begin
 	clk <= clk_r;
     tester_process: process 
 			begin 
+				nRst <= '0';
+				skiptime_clk(5);
+				nRst <= '1';
+				
+				skiptime_clk(10);
 			
 		end process;	
 
