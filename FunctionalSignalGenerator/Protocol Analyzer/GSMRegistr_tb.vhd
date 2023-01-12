@@ -43,8 +43,9 @@ architecture bench of GSMRegistr_top_tb is
         WB_Sel: out std_logic_vector( 1 downto 0 );
         WB_STB : out std_logic;
         WB_WE : out std_logic;
-		WB_Cyc_0: out std_logic;
-		WB_Cyc_2: out std_logic;
+	WB_Cyc_0: out std_logic;
+	WB_Cyc_2: out std_logic;
+	WB_CTI: out std_logic_vector( 2 downto 0 );
         rdreq : out STD_LOGIC
     );
     end component;
@@ -118,8 +119,9 @@ begin
         WB_Sel=> WB_Sel,
         WB_STB => WB_STB,
         WB_WE => WB_WE,
-		WB_Cyc_0 => WB_Cyc_0,
-		WB_Cyc_2 => WB_Cyc_2,
+	WB_Cyc_0 => WB_Cyc_0,
+	WB_Cyc_2 => WB_Cyc_2,
+	WB_CTI => WB_CTI,
         rdreq => rdreq
     );
 
