@@ -153,7 +153,7 @@ function demodulator_8PSK(IData_In:in STD_LOGIC_VECTOR(9 downto 0);QData_In:in S
 				end if;
 			end if;
 		else
-			if (signed(QData_In) < conv_signed(border_4_const,QData_In'LENGTH)) then
+			if (signed(QData_In) > conv_signed(border_4_const,QData_In'LENGTH)) then
 				information := b"101";
 			elsif (signed(QData_In) < conv_signed(border_3_const,QData_In'LENGTH)) then
 				information := b"000";
