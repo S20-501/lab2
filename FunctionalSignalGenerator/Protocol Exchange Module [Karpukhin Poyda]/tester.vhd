@@ -38,6 +38,14 @@ architecture test_arch of tester is
 	constant clockFrequencyHz_r : integer := 500;
 	constant clockPeriod_r: time := 1000 ms / clockFrequencyHz_r;
 	
+	procedure skiptime(time_count : in integer) is
+	begin
+
+	count_time : for k in 0 to time_count - 1 loop
+		wait until rising_edge(sig_clk_r);
+	end loop count_time;
+
+	end;
 	 
 begin
 
@@ -61,22 +69,27 @@ begin
 			
 			for i in 0 to 7 loop
 				serial_r <= pack_r(i);
-				wait for clockPeriod_r;
+--				wait for clockPeriod_r;
+				skiptime(1);
 			end loop;
 
 			serial_r <= '1'; -- LAST BIT
-			wait for clockPeriod_r;
+--			wait for clockPeriod_r;
+			skiptime(1);
 
 			serial_r <= '0';
-			wait for clockPeriod_r;
+--			wait for clockPeriod_r;
+			skiptime(1);
 			
 			for i in 8 to 15 loop
 				serial_r <= pack_r(i);
-				wait for clockPeriod_r;
+--				wait for clockPeriod_r;
+				skiptime(1);
 			end loop;
 
 			serial_r <= '1'; -- LAST BIT
-			wait for clockPeriod_r;
+--			wait for clockPeriod_r;
+			skiptime(1);
 		end procedure;
 		
 		procedure send_to_deserialized(signal pack_r: in  std_logic_vector(15 downto 0)) is
@@ -84,20 +97,24 @@ begin
 			sig_wrreq_input_r <= '1';
 			sig_data_input_r <= pack_r;
 			
-			wait for clockPeriod_r;
+--			wait for clockPeriod_r;
+			skiptime(1);
 			sig_wrreq_input_r <= '0';
 		end procedure;
 	begin
-		wait for 2 * clockPeriod_r;
+--		wait for 2 * clockPeriod_r;
+		skiptime(2);
 		
 		rdreq_output <= '0';
 		
 		send_to_serial(package_1_r, fsdo_r);
 		send_to_serial(package_3_r, fsdo_r);
-		wait for clockPeriod_r;
+--		wait for clockPeriod_r;
+		skiptime(1);
 		rdreq_output <= '1';
 		
-		wait for 2 * clockPeriod_r;
+--		wait for 2 * clockPeriod_r;
+		skiptime(2);
 		rdreq_output <= '0';
 		
 		wait for 50 ms - 10 us;

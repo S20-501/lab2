@@ -68,9 +68,13 @@ begin
 	end process;
 	
 	
-	process(clk)
+	process(clk, rst)
 	begin
-		if rising_edge(clk) then
+		if rst = '1' then
+			state_r <= 0;
+			fsdi_r <= '0';
+			
+		elsif rising_edge(clk) then
 		
 			-- OPENING FOR READING
 --			if (state_r = 19 or state_r = 0) and CONV_INTEGER(unsigned(usedw_count)) > 0 then
@@ -99,32 +103,27 @@ begin
 				state_r <= 1;
 			end if;
 			
-		end if;
-	
-	end process;
-	
-	process(state_r, q_input_r)
-	begin
-		-- FSDI
-		if state_r /= 0 then
-		
-			if state_r = 1 then
-				fsdi_r <= '0';
-			elsif state_r >= 2 and state_r <= 9 then
-				fsdi_r <= q_input_r(state_r - 2);
-			elsif state_r = 10 then
-				fsdi_r <= '1';
+			-- FSDI
+			if state_r /= 0 then
+			
+				if state_r = 1 then
+					fsdi_r <= '0';
+				elsif state_r >= 2 and state_r <= 9 then
+					fsdi_r <= q_input_r(state_r - 2);
+				elsif state_r = 10 then
+					fsdi_r <= '1';
 
-			elsif state_r = 11 then
-				fsdi_r <= '0';
-			elsif state_r >= 12 and state_r <= 19 then
-				fsdi_r <= q_input_r(state_r - 4);
-			elsif state_r = 20 then
+				elsif state_r = 11 then
+					fsdi_r <= '0';
+				elsif state_r >= 12 and state_r <= 19 then
+					fsdi_r <= q_input_r(state_r - 4);
+				elsif state_r = 20 then
+					fsdi_r <= '1';
+				end if;
+			
+			else
 				fsdi_r <= '1';
 			end if;
-		
-		else
-			fsdi_r <= '1';
 		end if;
 		
 	end process;
