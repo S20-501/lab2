@@ -21,9 +21,9 @@ VNk:bU<@Wni<fTLgzYARH?2
 !s100 `W@Re01kZY]29TgQ9`2LL3
 Z6 OV;C;10.5b;63
 33
-Z7 !s110 1673339280
+Z7 !s110 1673810107
 !i10b 1
-Z8 !s108 1673339280.000000
+Z8 !s108 1673810107.000000
 Z9 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/8b10_enc.vhd|
 Z10 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/8b10_enc.vhd|
 !i113 1
@@ -151,9 +151,9 @@ VRo^?1@n8UJaRb5[Oh6mz71
 !s100 V=iJ9cW@ME3n]@l^56=m<3
 R6
 32
-Z28 !s110 1673339281
+Z28 !s110 1673810108
 !i10b 1
-Z29 !s108 1673339281.000000
+Z29 !s108 1673810108.000000
 Z30 !s90 -reportprogress|300|-work|work|-2002|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly.vhd|
 Z31 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Modulator/assembly/generator_assembly.vhd|
 !i113 1
@@ -184,7 +184,7 @@ R31
 R32
 R12
 Egenerator_assembly2_tb
-Z36 w1672342262
+Z36 w1673810026
 R14
 R20
 R13
@@ -427,7 +427,7 @@ Vk`GV9:RY<CMM5IPfEd:@l1
 !s100 5eRhi7n[i?k>JS]LmV@O22
 R6
 33
-R28
+R7
 !i10b 1
 R8
 Z67 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/generator_top.vhd|
@@ -447,7 +447,7 @@ VaQh8PAZ1Ajiid80j3Tdfi0
 !s100 >I;a??faGAz7m9;SgnI783
 R6
 33
-R28
+R7
 !i10b 1
 R8
 R67
@@ -456,7 +456,7 @@ R68
 R11
 R12
 Egsmregister
-Z69 w1672339450
+Z69 w1673363676
 R1
 R2
 R3
@@ -470,9 +470,9 @@ R6
 33
 R7
 !i10b 1
-R8
-Z72 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd|
-Z73 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd|
+Z72 !s108 1673810106.000000
+Z73 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd|
+Z74 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/Protocol Analyzer/GSMRegistr.vhd|
 !i113 1
 R11
 R12
@@ -488,14 +488,14 @@ R6
 33
 R7
 !i10b 1
-R8
 R72
 R73
+R74
 !i113 1
 R11
 R12
 Egsmregistr_fifo
-Z74 w1671967823
+R69
 R1
 R2
 R3
@@ -741,7 +741,7 @@ R100
 R11
 R12
 Emodulator_lut
-Z101 w1671967203
+Z101 w1673341196
 R13
 R14
 R1
@@ -771,8 +771,8 @@ R2
 DEx4 work 13 modulator_lut 0 22 DMiK@oZ<fh^5VFD5b9XC02
 l74
 L15
-VKX50J@D7N0:A3fEe<3J730
-!s100 ^?C_z:Z6b3iW2ZJbPeX:A3
+VSJGzANEXGIl<0525A3LEf2
+!s100 UeT0olP]VbZfbJ3ILUGC63
 R6
 33
 R7
@@ -784,7 +784,7 @@ R105
 R11
 R12
 Emodulator_modulation
-Z106 w1672298032
+Z106 w1673805481
 R14
 R13
 R1
@@ -814,8 +814,8 @@ R2
 DEx4 work 20 modulator_modulation 0 22 hb8UTiU9gN_UXni?SP1CX2
 l77
 L50
-Vz:QfdbGNX]IfWCbm2Tk[X2
-!s100 LW?hXWA56R3nQUUKJMG?92
+V@GClDQU^[1:>P@;gQN1Hm3
+!s100 [VPO>ENR:;3eBHeCiLNER0
 R6
 33
 R7
@@ -1021,7 +1021,7 @@ R6
 33
 R28
 !i10b 1
-R29
+R8
 Z135 !s90 -reportprogress|300|-work|work|-2008|-explicit|-stats=none|D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd|
 Z136 !s107 D:/FPGA/lab2/FunctionalSignalGenerator/generator/sin_generator.vhd|
 !i113 1
@@ -1041,7 +1041,7 @@ R6
 33
 R28
 !i10b 1
-R29
+R8
 R135
 R136
 !i113 1
