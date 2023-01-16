@@ -19,20 +19,22 @@ entity GSMRegister is
 		WB_Cyc_2		: in	std_logic;
 		WB_Ack		: out std_logic;
 		WB_CTI		: in	std_logic_vector(2 downto 0);
-
-		PRT_O						: out 	std_logic_vector( 15 downto 0 ); --данные для кодирования и модуляции
+		
+		Sync						: out 	std_logic;
+		nRstDDS					: out 	std_logic;
+		Signal_mode				: out 	std_logic_vector( 1 downto 0);
+		Modulation_mode		: out 	std_logic_vector( 1 downto 0);
+		Mode						: out 	std_logic;
 --		Amplitude_OUT			: out 	std_logic_vector( 15 downto 0);
 --		StartPhase_OUT			: out 	std_logic_vector( 15 downto 0);
 		CarrierFrequency_OUT	: out 	std_logic_vector(31 downto 0);
 		SymbolFrequency_OUT	: out 	std_logic_vector( 31 downto 0);
 		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--идет в FIFO
 		wrreq						: out 	std_logic;
-		full : in std_logic
+		full 						:in 		std_logic
 	);
 end entity GSMRegister;
 architecture Behavior of GSMRegister is
-	signal QH_r: std_logic_vector( 7 downto 0 );
-	signal QL_r: std_logic_vector( 7 downto 0 );
 --	signal Amplitude_r: std_logic_vector( 15 downto 0 );
 --	signal Start_Phase_r: std_logic_vector( 15 downto 0 );
 	signal WB_DataOut_0_r: std_logic_vector(15 downto 0);
@@ -42,13 +44,17 @@ architecture Behavior of GSMRegister is
 	signal DataPort_r: std_logic_vector( 15 downto 0 ); -- пойдет в ФИФО
 	signal Ack_r: std_logic;
 	signal wrreq_r: std_logic;
+	
+	signal 	Sync_r						:	std_logic;
+	signal	nRstDDS_r					: 	std_logic;
+	signal	Signal_mode_r				: 	std_logic_vector( 1 downto 0);
+	signal	Modulation_mode_r		: 	std_logic_vector( 1 downto 0);
+	signal	Mode_r						: 	std_logic;
 begin
 		
 		process(clk,nRst, WB_STB, WB_WE, WB_Cyc_0, WB_Cyc_2)
 		begin
 			if (nRst = '0') then
-				QH_r <= x"00";
-				QL_r <= x"00";
 --				Amplitude_r <= x"0000";
 --				Start_Phase_r <= x"0000";
 				Carrier_Frequency_r <= x"00000000";
@@ -94,18 +100,22 @@ begin
 				end if;
 				
 				if (WB_Cyc_0 = '1') then 
-					if(WB_WE = '1' and WB_STB = '1') then
+					if(WB_WE = '1' and WB_STB = '1') then 
 						if(WB_Addr = x"0000") then
 							if(WB_Sel(1) = '1')then
-								QH_r <= WB_DataIn( 15 downto 8 );
-							end if;
-							if(WB_Sel(0) = '1') then
-								QL_r <= WB_DataIn( 7 downto 0 );
+								if(WB_DataIn(15 downto 7) = "000000000") then
+									Sync_r<= WB_DataIn(0);
+									nRstDDS_r<= WB_DataIn(0);
+									Signal_mode_r<= WB_DataIn(1 downto 0);
+									Modulation_mode_r<= WB_DataIn(1 downto 0);
+									Mode_r<= WB_DataIn(0);
+								end if;
 							end if;
 						end if;
 					elsif(WB_WE = '0' and WB_STB = '1') then
 						if(WB_Addr = x"0000") then
-							WB_DataOut_0_r( 15 downto 0 ) <= QH_r & QL_r;
+							WB_DataOut_0_r(15 downto 7) <= "000000000";
+							WB_DataOut_0_r(6 downto 0) <= Sync_r & nRstDDS_r & Signal_mode_r & Modulation_mode_r & Mode_r;
 						end if;
 					end if;
 					--
@@ -140,7 +150,11 @@ begin
 				end if;
 			end if;
 		end process;
- 	PRT_O( 15 downto 0 ) <= QH_r & QL_r;
+ 	Sync <= Sync_r;
+	nRstDDS <= nRstDDS_r;
+	Signal_mode <=	Signal_mode_r;
+	Modulation_mode <= Modulation_mode_r;
+	Mode <= Mode_r;
 --	Amplitude_OUT <= Amplitude_r;
 --	StartPhase_OUT <= Start_Phase_r;
 	CarrierFrequency_OUT <= Carrier_Frequency_r;
