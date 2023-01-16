@@ -18,7 +18,12 @@ entity GSMRegistr_top is
 		  WB_Cyc_2		: in	std_logic;
 		  WB_CTI		: in	std_logic_vector(2 downto 0);
     
-        PRT_O: out std_logic_vector( 15 downto 0 ); --данные для кодирования и модуляции
+        
+		  Sync						: out 	std_logic;
+		  nRstDDS					: out 	std_logic;
+		  Signal_mode				: out 	std_logic_vector( 1 downto 0);
+		  Modulation_mode		: out 	std_logic_vector( 1 downto 0);
+		  Mode						: out 	std_logic;
 --        Amplitude_OUT: out std_logic_vector( 15 downto 0);
 --       StartPhase_OUT: out std_logic_vector( 15 downto 0);
         CarrierFrequency_OUT: out std_logic_vector(31 downto 0);
@@ -65,7 +70,11 @@ architecture rtl of GSMRegistr_top is
 		WB_Ack		: out std_logic;
 		WB_CTI		: in	std_logic_vector(2 downto 0);
 
-		PRT_O						: out 	std_logic_vector( 15 downto 0 ); --данные для кодирования и модуляции
+		Sync						: out 	std_logic;
+		nRstDDS					: out 	std_logic;
+		Signal_mode				: out 	std_logic_vector( 1 downto 0);
+		Modulation_mode		: out 	std_logic_vector( 1 downto 0);
+		Mode						: out 	std_logic;
 --		Amplitude_OUT			: out 	std_logic_vector( 15 downto 0);
 --		StartPhase_OUT			: out 	std_logic_vector( 15 downto 0);
 		CarrierFrequency_OUT	: out 	std_logic_vector(31 downto 0);
@@ -92,10 +101,14 @@ begin
         WB_Sel => WB_Sel,
         WB_STB => WB_STB,
         WB_Cyc_0 => WB_Cyc_0,
-	WB_Cyc_2 => WB_Cyc_2,
+		  WB_Cyc_2 => WB_Cyc_2,
         WB_Ack => WB_Ack,
         WB_CTI => WB_CTI,
-        PRT_O => PRT_O,
+        Sync => Sync,
+		  nRstDDS => nRstDDS,
+		  Signal_mode =>	Signal_mode,
+		  Modulation_mode => Modulation_mode,
+		  Mode => Mode,
  --       Amplitude_OUT => Amplitude_OUT,
  --       StartPhase_OUT => StartPhase_OUT,
         CarrierFrequency_OUT => CarrierFrequency_OUT,
