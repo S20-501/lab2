@@ -108,10 +108,10 @@ begin
 					if(WB_WE = '1' and WB_STB = '1') then 
 						if(WB_Addr = x"0000") then
 							if(WB_Sel(0) = '1')then
-								Sync_r<= WB_DataIn(0);
-								nRstDDS_r<= WB_DataIn(0);
-								Signal_mode_r<= WB_DataIn(1 downto 0);
-								Modulation_mode_r<= WB_DataIn(1 downto 0);
+								Sync_r<= WB_DataIn(6);
+								nRstDDS_r<= WB_DataIn(5);
+								Signal_mode_r<= WB_DataIn(4 downto 3);
+								Modulation_mode_r<= WB_DataIn(2 downto 1);
 								Mode_r<= WB_DataIn(0);
 							end if;
 						end if;
