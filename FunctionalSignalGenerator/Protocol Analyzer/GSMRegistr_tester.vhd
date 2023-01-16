@@ -45,13 +45,10 @@ begin
 				WB_Cyc_0 <= '0';
 				WB_Cyc_2 <= '0';
 				WB_CTI <= (others => '0');
-				nRst <= '1';
-				
-				
-				-- Ð¡Ð±ÑÐ¾Ñ
 				nRst <= '0';
-				skiptime_clk(5);
+				wait until rising_edge(clk_r);
 				nRst <= '1';
+				
 				
 				skiptime_clk(10);
 				--for address 0x000C
