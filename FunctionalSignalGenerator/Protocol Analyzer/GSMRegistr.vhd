@@ -107,7 +107,7 @@ begin
 				if (WB_Cyc_0 = '1') then 
 					if(WB_WE = '1' and WB_STB = '1') then 
 						if(WB_Addr = x"0000") then
-							if(WB_Sel(1) = '1')then
+							if(WB_Sel(0) = '1')then
 								Sync_r<= WB_DataIn(0);
 								nRstDDS_r<= WB_DataIn(0);
 								Signal_mode_r<= WB_DataIn(1 downto 0);
