@@ -95,7 +95,7 @@ begin
 				--
 				
 				if (WB_Cyc_2 = '1' and WB_WE = '1' and WB_STB = '1' and WB_Addr = x"000C") then
-					if(wrreq_r = '0) then
+					if(wrreq_r = '0') then
 						if (full = '0') then
 							wrreq_r <= '1';
 						else
