@@ -39,7 +39,11 @@ architecture assembly2 of assembly is
    signal WB_CTI : std_logic_vector (2 downto 0);
 --protocol analizer
 	signal rdreq : std_logic;
-	signal PRT_O	: std_logic_vector( 15 downto 0 );		
+	signal Sync						:	std_logic;
+	signal nRstDDS					: 	std_logic;
+	signal Signal_mode				: 	std_logic_vector( 1 downto 0);
+	signal Modulation_mode		: 	std_logic_vector( 1 downto 0);
+	signal Mode						: 	std_logic;		
 	signal CarrierFrequency	: std_logic_vector(31 downto 0);
 	signal SymbolFrequency	: std_logic_vector( 31 downto 0);
 	signal DataPort			: std_logic_vector( 15 downto 0);
@@ -103,7 +107,11 @@ begin
 	 WB_DataOut_0 => WB_DataIn_0,
 	 WB_DataOut_2 => WB_DataIn_2,
 	 WB_Ack => WB_Ack,
-    PRT_O => PRT_O,
+    Sync => Sync,
+	 nRstDDS => nRstDDS,
+	 Signal_mode =>	Signal_mode,
+	 Modulation_mode => Modulation_mode,
+	 Mode => Mode,
   --out to modulator
     CarrierFrequency_OUT => CarrierFrequency,
     SymbolFrequency_OUT => SymbolFrequency,
@@ -114,8 +122,8 @@ begin
     port map (
       clk => Clk,
       nRst => nRst,
-      ModulationMode => PRT_O(2 downto 1),
-      Mode => PRT_O(0),
+      ModulationMode => Modulation_mode,
+      Mode => Mode,
 		
       Amplitude => Amplitude,
       StartPhase => StartPhase,
