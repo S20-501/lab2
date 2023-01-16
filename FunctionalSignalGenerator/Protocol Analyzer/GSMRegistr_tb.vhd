@@ -19,9 +19,13 @@ architecture bench of GSMRegistr_top_tb is
       WB_STB : in std_logic;
       WB_WE : in std_logic;
       WB_Cyc_0: in std_logic;
-	WB_Cyc_2: in std_logic;
+		WB_Cyc_2: in std_logic;
       WB_CTI: in std_logic_vector(2 downto 0);
-      PRT_O : out std_logic_vector( 15 downto 0 );
+      Sync						: out 	std_logic;
+		nRstDDS					: out 	std_logic;
+		Signal_mode				: out 	std_logic_vector( 1 downto 0);
+		Modulation_mode		: out 	std_logic_vector( 1 downto 0);
+		Mode						: out 	std_logic;
 --      Amplitude_OUT : out std_logic_vector( 15 downto 0);
 --      StartPhase_OUT : out std_logic_vector( 15 downto 0);
       CarrierFrequency_OUT : out std_logic_vector(31 downto 0);
@@ -69,7 +73,11 @@ architecture bench of GSMRegistr_top_tb is
   signal WB_WE : std_logic;
   signal WB_Cyc_0 : STD_LOGIC;
   signal WB_Cyc_2 : STD_LOGIC;
-  signal PRT_O : std_logic_vector( 15 downto 0 );
+  signal Sync						:	std_logic;
+  signal	nRstDDS					: 	std_logic;
+  signal	Signal_mode				: 	std_logic_vector( 1 downto 0);
+  signal	Modulation_mode		: 	std_logic_vector( 1 downto 0);
+  signal	Mode						: 	std_logic;
 --  signal Amplitude_OUT : std_logic_vector( 15 downto 0);
 --  signal StartPhase_OUT : std_logic_vector( 15 downto 0);
   signal CarrierFrequency_OUT : std_logic_vector(31 downto 0);
@@ -98,7 +106,11 @@ begin
       WB_Cyc_0 => WB_Cyc_0,
       WB_Cyc_2 => WB_Cyc_2,
       WB_CTI => WB_CTI,
-      PRT_O => PRT_O,
+      Sync => Sync,
+		nRstDDS => nRstDDS,
+		Signal_mode =>	Signal_mode,
+		Modulation_mode => Modulation_mode,
+		Mode => Mode,
 --      Amplitude_OUT => Amplitude_OUT,
 --      StartPhase_OUT => StartPhase_OUT,
       CarrierFrequency_OUT => CarrierFrequency_OUT,
