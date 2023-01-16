@@ -23,13 +23,13 @@ architecture rtl of MA is
 
 	signal moving_average1_r	: moving_average_t;
 	signal moving_average2_r	: moving_average_t;
-	signal acc1_r				: std_logic_vector(18-1 downto 0);
-	signal acc2_r				: std_logic_vector(18-1 downto 0);
+	signal acc1_r				: std_logic_vector(15-1 downto 0);
+	signal acc2_r				: std_logic_vector(15-1 downto 0);
 
 	signal IData_Out_r			: std_logic_vector(10-1 downto 0);
 	signal QData_out_r			: std_logic_vector(10-1 downto 0);
-	signal product1_r			: std_logic_vector(34-1 downto 0);
-	signal product2_r			: std_logic_vector(34-1 downto 0);
+	signal product1_r			: std_logic_vector(28-1 downto 0);
+	signal product2_r			: std_logic_vector(28-1 downto 0);
 
 	constant filterCoeff : int_array := (
 		2 => X"8000",
@@ -93,12 +93,18 @@ begin
 				moving_average1_r	<= IData_In & moving_average1_r(0 to moving_average1_r'length-2);
 				acc1_r					<= acc1_r + IData_In - moving_average1_r(conv_integer(MANumber)-1);
 				product1_r			<= acc1_r * filterCoeff(conv_integer(MANumber));
-				IData_Out_r				<= product1_r(16+10-1 downto 16);
+				if(product1_r(28-1 downto 26-1) = "00") then
+					IData_Out_r				<= product1_r(16+10-1 downto 16);
+				else
+					IData_Out_r 			<= "1111111111";
 				
 				moving_average2_r	<= QData_In & moving_average2_r(0 to moving_average2_r'length-2);
 				acc2_r					<= acc2_r + QData_In - moving_average2_r(conv_integer(MANumber)-1);
 				product2_r			<= acc2_r * filterCoeff(conv_integer(MANumber));
-				QData_out_r				<= product2_r(16+10-1 downto 16);
+				if(product2_r(28-1 downto 26-1) = "00") then
+					QData_out_r				<= product2_r(16+10-1 downto 16);
+				else
+					QData_out_r 			<= "1111111111";
 			end if;
 		end if;
 	end process p_average;
