@@ -64,11 +64,11 @@ begin
 				Ack_r <= '0';
 				WB_DataOut_0_r <= "0000000000000000";
 				WB_DataOut_2_r <= "0000000000000000";
-				Sync_r<= "0";
-				nRstDDS_r<= "0";
-				Signal_mode_r<= "00";
-				Modulation_mode_r<= "00";
-				Mode_r<= "00";
+				Sync_r <= '0';
+				nRstDDS_r <= '0';
+				Signal_mode_r <= "00";
+				Modulation_mode_r <= "00";
+				Mode_r <= '0';
 			elsif (rising_edge(clk)) then
 			
 				if ((WB_STB and WB_Cyc_2) = '1') then
