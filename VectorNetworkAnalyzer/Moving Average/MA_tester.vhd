@@ -31,7 +31,7 @@ architecture a_ma_tester of ma_tester is
 			begin
 				IData_In	<= (others => '0');
 				QData_In	<= (others => '0');
-				MANumber	<= b"00011"; -- 3
+				MANumber	<= b"11111"; -- 31
 				
 				skiptime_clk(2);
 				
@@ -41,34 +41,10 @@ architecture a_ma_tester of ma_tester is
 				i_nRst <= '1';
 				
 				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
+				QData_In <= b"0000000000"; -- 0
 				skiptime_clk(1);
 				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
+				QData_In <= b"0000000000"; -- 0
 				skiptime_clk(1);
 				IData_In <= b"0000001010"; -- 10
 				QData_In <= b"0000001010"; -- 10
@@ -76,17 +52,205 @@ architecture a_ma_tester of ma_tester is
 				IData_In <= b"0000001010"; -- 10
 				QData_In <= b"0000001010"; -- 10
 				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
+				IData_In <= b"0000000000"; -- 0
 				QData_In <= b"0000001010"; -- 10
 				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
+				IData_In <= b"0000000000"; -- 0
 				QData_In <= b"0000001010"; -- 10
 				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
 				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				
+				
+				skiptime_clk(50);
+				
+				
+				
+				
+				MANumber	<= b"00000"; -- 0
+				
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				
+				skiptime_clk(20);
+				
+				MANumber	<= b"00011"; -- 3
+				
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				
+				
+				skiptime_clk(20);
+				
+				MANumber	<= b"00111"; -- 7
+				
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
 				skiptime_clk(1);
 				
 				
@@ -95,16 +259,67 @@ architecture a_ma_tester of ma_tester is
 				MANumber	<= b"00100"; -- 4
 				
 				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
 				QData_In <= b"0000001010"; -- 10
 				skiptime_clk(1);
-				IData_In <= b"0000001011"; -- 11
-				QData_In <= b"0000001011"; -- 11
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
 				skiptime_clk(1);
-				IData_In <= b"0000001100"; -- 12
-				QData_In <= b"0000001100"; -- 12
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
 				skiptime_clk(1);
-				IData_In <= b"0000001101"; -- 13
-				QData_In <= b"0000001101"; -- 13
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000001010"; -- 10
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				IData_In <= b"0000000000"; -- 0
+				QData_In <= b"0000000000"; -- 0
+				skiptime_clk(1);
+				
+				
+				skiptime_clk(20);
+				
+				MANumber	<= b"00100"; -- 4
+				
+				IData_In <= b"0000000011"; -- 3
+				QData_In <= b"0000000011"; -- 3
+				skiptime_clk(1);
+				IData_In <= b"0000000100"; -- 4
+				QData_In <= b"0000000100"; -- 4
+				skiptime_clk(1);
+				IData_In <= b"0000001010"; -- 10
+				QData_In <= b"0000001010"; -- 10
 				skiptime_clk(1);
 				IData_In <= b"0000001110"; -- 14
 				QData_In <= b"0000001110"; -- 14
@@ -115,128 +330,16 @@ architecture a_ma_tester of ma_tester is
 				IData_In <= b"0000010000"; -- 16
 				QData_In <= b"0000010000"; -- 16
 				skiptime_clk(1);
-				IData_In <= b"0000010001"; -- 17
-				QData_In <= b"0000010001"; -- 17
-				skiptime_clk(1);
 				IData_In <= b"0000010010"; -- 18
 				QData_In <= b"0000010010"; -- 18
 				skiptime_clk(1);
-				IData_In <= b"0000010011"; -- 19
-				QData_In <= b"0000010011"; -- 19
+				IData_In <= b"0000010110"; -- 22
+				QData_In <= b"0000010110"; -- 22
 				skiptime_clk(1);
-				IData_In <= b"0000010100"; -- 20
-				QData_In <= b"0000010100"; -- 20
-				skiptime_clk(1);
-				IData_In <= b"0000010101"; -- 21
-				QData_In <= b"0000010101"; -- 21
-				skiptime_clk(30);
+				IData_In <= b"0000010111"; -- 23
+				QData_In <= b"0000010111"; -- 23
 				
-				MANumber	<= b"00000"; -- 0
-				
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
 				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				
-				
-				skiptime_clk(30);
-				
-				MANumber	<= b"11111"; -- 31
-				
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				IData_In <= b"0000000101"; -- 5
-				QData_In <= b"0000000101"; -- 5
-				skiptime_clk(1);
-				
-				skiptime_clk(10000);
 				
 		end process;	
 
