@@ -45,10 +45,13 @@ begin
 				WB_Cyc_0 <= '0';
 				WB_Cyc_2 <= '0';
 				WB_CTI <= (others => '0');
-				nRst <= '0';
-				wait until rising_edge(clk_r);
 				nRst <= '1';
 				
+				
+				-- Ð¡Ð±ÑÐ¾Ñ
+				nRst <= '0';
+				skiptime_clk(5);
+				nRst <= '1';
 				
 				skiptime_clk(10);
 				--for address 0x000C
@@ -259,7 +262,7 @@ begin
 				WB_STB <= '0';
 				WB_Cyc_2 <= '0';
 				
-				skiptime_clk(15);
+				skiptime_clk(30);
 				
 				--read FIFO
 				rdreq <= '1';
@@ -268,36 +271,48 @@ begin
 				rdreq <= '0';
 				skiptime_clk(15);
 				
+				
+				-- write pack of data in FIFO
 				--CTI == 001
-				WB_CTI <= "001";
-				WB_Cyc_2 <= '1';
-				WB_Addr <= (3 => '1',2 => '1', others => '0');
-				WB_STB <= '1';
-				WB_Sel <= "11";
-				WB_WE <= '1';
-				
-				WB_DataIn <= "0000000100000001";
-				wait until rising_edge(clk_r);
-				wait until rising_edge(clk_r);
-				wait for 200 fs;
-				WB_STB <= '0';
-				wait until rising_edge(clk_r);
-				wait for 200 fs;
-				WB_DataIn <= "0000000100000010";
-				WB_STB <= '1';
-				wait until rising_edge(clk_r);
-				wait for 200 fs;
-				WB_DataIn <= "0000000110000011";
-				wait until rising_edge(clk_r);
-				wait for 200 fs;
-				WB_DataIn <= "0000001000000100";
-				WB_CTI <= "111";
-				wait until rising_edge(clk_r);
-				wait for 200 fs;
-				WB_CTI <= "000";
-				WB_STB <= '0';
-				skiptime_clk(15);
-				
+	WB_CTI <= "001";
+	WB_Cyc_2 <= '1';
+	WB_Addr <= (3 => '1',2 => '1', others => '0');
+	WB_STB <= '1';
+	WB_Sel <= "11";
+	WB_WE <= '1';
+
+	WB_DataIn <= "0000000100000001";
+	wait until rising_edge(clk_r);
+	wait until rising_edge(clk_r);
+	WB_STB <= '0';
+	skiptime_clk(1);
+	
+	WB_STB <= '1';
+	WB_DataIn <= "0000000100000010";
+	wait until rising_edge(clk_r);
+	wait until rising_edge(clk_r);
+	WB_STB <= '0';
+	skiptime_clk(1);
+	WB_STB <= '1';
+	WB_DataIn <= "0000000100000011";
+	wait until rising_edge(clk_r);
+	wait until rising_edge(clk_r);
+	WB_STB <= '0';
+	skiptime_clk(1);
+	WB_STB <= '1';	
+	WB_DataIn <= "0000000100000100";
+	wait until rising_edge(clk_r);
+	wait until rising_edge(clk_r);
+	WB_STB <= '0';
+	skiptime_clk(1);
+	WB_STB <= '1';
+	WB_DataIn <= "0000000100000101";
+	wait until rising_edge(clk_r);
+	wait until rising_edge(clk_r);
+	WB_STB <= '0';
+
+	WB_CYC_2 <= '0';
+	skiptime_clk(15);
 				
 		end process;	
 
