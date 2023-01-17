@@ -42,52 +42,31 @@ architecture a_ma_tester of ma_tester is
 				
 				IData_In <= b"0000001010"; -- 10
 				QData_In <= b"0000000000"; -- 0
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000000"; -- 0
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
+				skiptime_clk(10);
+				--IData_In <= b"0000001010"; -- 10
+				--QData_In <= b"0000000000"; -- 0
+				--skiptime_clk(10);
 				IData_In <= b"0000001010"; -- 10
 				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
+				skiptime_clk(10);
 				IData_In <= b"0000000000"; -- 0
 				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000000"; -- 0
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
+				skiptime_clk(10);
 				IData_In <= b"0000000000"; -- 0
 				QData_In <= b"0000000000"; -- 0
-				skiptime_clk(1);
-				IData_In <= b"0000000000"; -- 0
-				QData_In <= b"0000000000"; -- 0
-				skiptime_clk(1);
+				skiptime_clk(10);
 				IData_In <= b"0000001010"; -- 10
 				QData_In <= b"0000000000"; -- 0
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000000000"; -- 0
-				skiptime_clk(1);
+				skiptime_clk(10);
 				IData_In <= b"0000001010"; -- 10
 				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000001010"; -- 10
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
+				skiptime_clk(10);
 				IData_In <= b"0000000000"; -- 0
 				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
-				IData_In <= b"0000000000"; -- 0
-				QData_In <= b"0000001010"; -- 10
-				skiptime_clk(1);
+				skiptime_clk(10);
 				IData_In <= b"0000000000"; -- 0
 				QData_In <= b"0000000000"; -- 0
-				skiptime_clk(1);
-				IData_In <= b"0000000000"; -- 0
-				QData_In <= b"0000000000"; -- 0
-				skiptime_clk(1);
+				skiptime_clk(10);
 				
 				
 				skiptime_clk(50);
