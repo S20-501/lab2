@@ -379,7 +379,11 @@ begin
                   WB_STB <= '0';
                   WB_Sel <= B"00";
                 end if;
-                byte_count <= byte_count - B"10";
+                if(byte_count > 1) then 
+			byte_count <= byte_count - B"10";
+		elsif(byte_count = 1) then
+			byte_count <= byte_count - B"01";
+		end if;
                 WB_ready_r <= B"00";
                 wrreq_output <= '1';
                 --if (WB_ready_r = B"11") then
