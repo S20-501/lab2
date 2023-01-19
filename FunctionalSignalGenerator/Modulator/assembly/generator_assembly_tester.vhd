@@ -284,8 +284,7 @@ begin
 
       send_prt(PRT_O, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);
 
-      
-
+    
       CarrierFrequency_r <= X"010003FF";
       send_carrier(CarrierFrequency_r, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);
       SymbolFrequency_r <= X"010003FF";
@@ -328,7 +327,7 @@ begin
       data_send(data_counter, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);
 
       data_send(data_counter, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);
-      SymbolFrequency_r <= X"7FFFFFFF";
+      SymbolFrequency_r <= X"0010FFFF";
       send_symbol(SymbolFrequency_r, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);
       data_send(data_counter, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);
 
@@ -338,8 +337,6 @@ begin
       skiptime(10);
       Mode_r <= '1';
       send_prt(PRT_O, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);
-      data_send(data_counter, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);
-
-      stop;
+      data_send(data_counter, WB_Addr, WB_DataIn, WB_Sel, WB_STB, WB_WE, WB_Cyc);      stop;
   end process;
 end;
