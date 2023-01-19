@@ -87,18 +87,18 @@ begin
             CurrentByte_r <= '0'; -- minor byte first
             CodedData_r <= (others => '0');
             WordReadRequest_r <= '0';
-            DDS_En_r <= '1';
+            DDS_En_r <= '0';
         elsif rising_edge(clk) then
+            DDS_En_r <= '1';
+
             if (ByteReadRequest = '1') then
                 CurrentByte_r <= not CurrentByte_r;
                 CodedData_r <= DataOut_r;
 
                 if (CurrentByte_r = '1' and empty = '0') then                    
                     WordReadRequest_r <= '1';
-                    DDS_En_r <= '1';
                 elsif (CurrentByte_r = '1' and empty = '1') then
                     WordReadRequest_r <= '0';
-                    DDS_En_r <= '0';
                 end if;
             elsif WordReadRequest_r = '1' then
                 WordReadRequest_r <= '0';
@@ -115,3 +115,4 @@ begin
         DataPort(7 downto 0) when '0',
         (others => '0') when others;
 end architecture;
+
