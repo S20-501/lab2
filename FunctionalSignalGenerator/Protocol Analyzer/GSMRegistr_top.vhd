@@ -212,11 +212,16 @@ begin
 		);
 	process(clk, rdreq_buff)
 		begin
-			if (rising_edge(clk)) then
-				if(rdreq_buff = '0') then 
-					WB_DataOut_2 <= WB_DataOut_1_r;
-				else
-					WB_DataOut_2 <= WB_DataOut_2_r;
+			if( nRst = '0') then
+				WB_DataOut_2 <= (others =>'0');
+				
+			elsif (rising_edge(clk)) then
+				if(WB_Cyc_2 = '1' and WB_WE = '0' and WB_STB = '1' ) then
+					if(WB_Addr = x"000C") then
+						WB_DataOut_2 <= WB_DataOut_2_r;
+					else
+						WB_DataOut_2 <= WB_DataOut_1_r;
+					end if;
 				end if;
 			end if;
 	end process;
