@@ -31,7 +31,10 @@ entity GSMRegister is
 		SymbolFrequency_OUT	: out 	std_logic_vector( 31 downto 0);
 		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--идет в FIFO
 		wrreq						: out 	std_logic;
-		full 						:in 		std_logic
+		full 						: in 		std_logic;
+		
+		rdreq_buff 					: out		std_logic;
+		empty_buff 				: in 		std_logic
 	);
 end entity GSMRegister;
 architecture Behavior of GSMRegister is
@@ -48,8 +51,11 @@ architecture Behavior of GSMRegister is
 	signal 	Sync_r						:	std_logic;
 	signal	nRstDDS_r					: 	std_logic;
 	signal	Signal_mode_r				: 	std_logic_vector( 1 downto 0);
-	signal	Modulation_mode_r		: 	std_logic_vector( 1 downto 0);
+	signal	Modulation_mode_r			: 	std_logic_vector( 1 downto 0);
 	signal	Mode_r						: 	std_logic;
+	
+	signal 	rdreq_buff_r 				:	std_logic;
+
 begin
 		
 		process(clk,nRst, WB_STB, WB_WE, WB_Cyc_0, WB_Cyc_2)
@@ -69,16 +75,9 @@ begin
 				Signal_mode_r <= "00";
 				Modulation_mode_r <= "00";
 				Mode_r <= '0';
+				rdreq_buff_r <= '0';
 			elsif (rising_edge(clk)) then
-				if((WB_CTI = "001" or WB_CTI = "111") and WB_Cyc_2 = '1' and WB_WE = '1' and WB_Addr = x"000C") then
-					if(WB_STB = '1') then
-						if(full = '0') then
-							Ack_r <= '1';
-						else -- if FIFO is full
-							Ack_r <= '0';
-						end if;
-					end if;
-				elsif((WB_STB and WB_Cyc_2) = '1') then--other operation
+				if((WB_STB and WB_Cyc_2) = '1') then--other operation
 					if(Ack_r = '0') then
 						if (WB_Addr = x"000C")then
 						   if (full = '0') then
@@ -113,6 +112,21 @@ begin
 					end if;
 				else
 					wrreq_r <= '0';
+				end if;
+				
+				
+				if(WB_Cyc_2 = '1' and WB_WE = '0' and WB_STB = '1' and WB_Addr = x"000C") then
+					if(rdreq_buff_r = '0') then
+						if (empty_buff = '0') then
+							rdreq_buff_r <= '1';
+						else
+							rdreq_buff_r <= '0';
+						end if;
+					else
+						rdreq_buff_r <= '0';
+					end if;
+				else
+					rdreq_buff_r <= '0';
 				end if;
 				
 				if (WB_Cyc_0 = '1') then 
@@ -157,8 +171,6 @@ begin
 							WB_DataOut_2_r <= Symbol_Frequency_r( 31 downto 16 );
 						elsif(WB_Addr = x"000A") then
 							WB_DataOut_2_r <= Symbol_Frequency_r( 15 downto 0 );
-						elsif(WB_Addr = x"000C") then
-							WB_DataOut_2_r <= DataPort_r;
 						end if;
 					end if;
 				end if;
@@ -178,4 +190,5 @@ begin
 	WB_Ack <= Ack_r;
 	WB_DataOut_0 <= WB_DataOut_0_r;
 	WB_DataOut_2 <= WB_DataOut_2_r;
+	rdreq_buff <= rdreq_buff_r;
 end architecture Behavior;
