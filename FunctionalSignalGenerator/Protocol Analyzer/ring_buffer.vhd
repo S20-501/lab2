@@ -68,37 +68,30 @@ begin
   full_next <= '1' when fill_count_i >= RAM_DEPTH - 2 else '0';
  
   -- Update the head pointer in write
-  PROC_HEAD : process(clk)
+  PROC_HEAD : process(clk, nRst)
   begin
-    if rising_edge(clk) then
-      if nRst = '0' then
+    if nRst = '0' then
         head <= 0;
-      else
- 
+    elsif rising_edge(clk) then
         if wr_en = '1' and full_i = '0' then
           incr(head);
         end if;
- 
-      end if;
     end if;
   end process;
  
   -- Update the tail pointer on read and pulse valid
-  PROC_TAIL : process(clk)
+  PROC_TAIL : process(clk, nRst)
   begin
-    if rising_edge(clk) then
-      if nRst = '0' then
-        tail <= 0;
-        rd_valid <= '0';
-      else
+    if nRst = '0' then
+       tail <= '0';
+       rd_valid <= '0';
+    elsif rising_edge(clk) then
         rd_valid <= '0';
  
         if rd_en = '1' and empty_i = '0' then
           incr(tail);
           rd_valid <= '1';
         end if;
- 
-      end if;
     end if;
   end process;
  
