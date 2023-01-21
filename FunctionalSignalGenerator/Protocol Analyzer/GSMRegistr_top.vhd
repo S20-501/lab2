@@ -30,10 +30,10 @@ entity GSMRegistr_top is
         SymbolFrequency_OUT: out std_logic_vector( 31 downto 0);
         
         
-		rdreq		: IN STD_LOGIC ;
-		empty		: OUT STD_LOGIC ;
+		  rdreq		: IN STD_LOGIC ;
+		  empty		: OUT STD_LOGIC ;
 --	full		: OUT STD_LOGIC ;
-		q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+		  q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
 --	usedw		: OUT STD_LOGIC_VECTOR (9 DOWNTO 0)
     );
 end entity GSMRegistr_top;
@@ -81,12 +81,67 @@ architecture rtl of GSMRegistr_top is
 		SymbolFrequency_OUT	: out 	std_logic_vector( 31 downto 0);
 		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--идет в FIFO
 		wrreq						: out 	std_logic;
-		full : in std_logic
+		full 						: in 		std_logic;
+		
+		rdreq_buff 				: out		std_logic;
+		empty_buff 				: in 		std_logic
 	);
 	end component;
-    signal wrreq : std_logic 	:= '0';
-	 signal full_r : std_logic := '0';
-    signal DataPort_r: std_logic_vector( 15 downto 0 ) := (others=>'0');
+	
+	component ring_buffer
+		generic (
+			RAM_WIDTH : natural;
+			RAM_DEPTH : natural
+		);
+		port (
+			clk : in std_logic;
+			nRst : in std_logic;
+
+			-- Write port
+			wr_en : in std_logic;
+			wr_data : in std_logic_vector(RAM_WIDTH - 1 downto 0);
+
+			-- Read port
+			rd_en : in std_logic;
+			rd_valid : out std_logic;
+			rd_data : out std_logic_vector(RAM_WIDTH - 1 downto 0);
+	
+			-- Flags
+			empty : out std_logic;
+			empty_next : out std_logic;
+			full : out std_logic;
+			full_next : out std_logic;
+
+			-- The number of elements in the FIFO
+			fill_count : out integer range RAM_DEPTH - 1 downto 0
+		);
+	end component;
+
+
+	signal wrreq 		: std_logic 	:= '0';
+	signal full_r 		: std_logic 	:= '0';
+	signal DataPort_r	: std_logic_vector( 15 downto 0 ) := (others=>'0');
+	signal rdreq_buff : std_logic := '0';
+	signal empty_buff : std_logic := '0';
+	
+	signal WB_DataOut_1_r	: std_logic_vector( 15 downto 0 ) := (others=>'0');
+	signal WB_DataOut_2_r	: std_logic_vector( 15 downto 0 ) := (others=>'0');
+	
+	constant RAM_WIDTH : natural := 16;
+	constant RAM_DEPTH : natural := 256;
+
+  -- DUT signals
+	
+	signal rd_en : std_logic := '0';
+	signal rd_valid : std_logic;
+	signal rd_data : std_logic_vector(RAM_WIDTH - 1 downto 0);
+	
+--	signal empty_buff : std_logic;
+	signal empty_next : std_logic;
+	signal full : std_logic;
+	signal full_next : std_logic;
+	signal fill_count : integer range RAM_DEPTH - 1 downto 0;
+	
 begin
 --		full <= full_r;
     GSMRegister_inst : GSMRegister
@@ -95,7 +150,7 @@ begin
         nRst => nRst,
         WB_Addr => WB_Addr,
         WB_DataOut_0 => WB_DataOut_0,
-		  WB_DataOut_2 => WB_DataOut_2,
+		  WB_DataOut_2 => WB_DataOut_1_r,
         WB_DataIn => WB_DataIn,
         WB_WE => WB_WE,
         WB_Sel => WB_Sel,
@@ -115,8 +170,10 @@ begin
         SymbolFrequency_OUT => SymbolFrequency_OUT,
         DataPort_OUT => DataPort_r,
         wrreq => wrreq,
-		  full => full_r
-    );
+		  full => full_r,
+		  rdreq_buff => rdreq_buff,
+		  empty_buff => empty_buff
+	 );
 						
 
     GSMRegistr_FIFO_inst : GSMRegistr_FIFO
@@ -130,4 +187,37 @@ begin
             q => q
 --            usedw => usedw
         );
+	 DUT : ring_buffer
+		 generic map (
+			RAM_WIDTH => RAM_WIDTH,
+			RAM_DEPTH => RAM_DEPTH
+		 )
+		port map (
+			clk => clk,
+			nRst => nRst,
+			
+			wr_en => wrreq,
+			wr_data => DataPort_r,
+			
+			rd_en => rdreq_buff,
+			rd_valid => rd_valid,
+			rd_data => WB_DataOut_2_r,
+			
+			empty => empty_buff,
+			empty_next => empty_next,
+
+			full => full,
+			full_next => full_next,
+			fill_count => fill_count
+		);
+	process(clk, rdreq_buff)
+		begin
+			if (rising_edge(clk)) then
+				if(rdreq_buff = '0') then 
+					WB_DataOut_2 <= WB_DataOut_1_r;
+				else
+					WB_DataOut_2 <= WB_DataOut_2_r;
+				end if;
+			end if;
+	end process;
 end architecture;
