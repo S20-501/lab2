@@ -46,7 +46,7 @@ architecture rtl of GSMRegistr_top is
         rdreq : in STD_LOGIC;
         wrreq : in STD_LOGIC;
         empty : out STD_LOGIC;
-        full : out STD_LOGIC;
+        almost_full : out STD_LOGIC;
         q : out STD_LOGIC_VECTOR (15 DOWNTO 0)
  --       usedw : out STD_LOGIC_VECTOR (9 DOWNTO 0)
       );
@@ -128,13 +128,12 @@ architecture rtl of GSMRegistr_top is
 	signal WB_DataOut_2_r	: std_logic_vector( 15 downto 0 ) := (others=>'0');
 	
 	constant RAM_WIDTH : natural := 16;
-	constant RAM_DEPTH : natural := 256;
+	constant RAM_DEPTH : natural := 1024;
 
   -- DUT signals
 	
 	signal rd_en : std_logic := '0';
 	signal rd_valid : std_logic;
-	signal rd_data : std_logic_vector(RAM_WIDTH - 1 downto 0);
 	
 --	signal empty_buff : std_logic;
 	signal empty_next : std_logic;
@@ -183,7 +182,7 @@ begin
             rdreq => rdreq,
             wrreq => wrreq,
             empty => empty,
-            full => full_r,
+            almost_full => full_r,
             q => q
 --            usedw => usedw
         );
