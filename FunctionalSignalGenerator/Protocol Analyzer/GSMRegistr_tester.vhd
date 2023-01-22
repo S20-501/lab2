@@ -39,19 +39,16 @@ begin
 				WB_Addr <= (others => '0');
 				WB_DataIn <= (others => '0');
 				WB_WE  <= '0';
-				WB_Sel <= (others => '0');
+				WB_Sel <= "11";
 				WB_STB <= '0';
 				rdreq <= '0';
 				WB_Cyc_0 <= '0';
 				WB_Cyc_2 <= '0';
 				WB_CTI <= (others => '0');
-				nRst <= '1';
-				
-				
-				-- Ð¡Ð±ÑÐ¾Ñ
 				nRst <= '0';
-				skiptime_clk(5);
+				wait until rising_edge(clk_r);
 				nRst <= '1';
+				
 				
 				skiptime_clk(10);
 				--for address 0x000C
@@ -67,6 +64,13 @@ begin
 				WB_Cyc_2 <= '0';
 				WB_WE <= '0';
 				skiptime_clk(10);
+				rdreq <= '1';
+				wait until rising_edge(clk_r);
+				wait for 200 fs;
+				rdreq <= '0';
+				skiptime_clk(15);
+				skiptime_clk(15);
+				
 				
 				--for address 0x0000
 				WB_WE <= '1';
@@ -118,7 +122,7 @@ begin
 				WB_Cyc_0 <= '1';
 				WB_Addr <= (others => '0');
 				WB_STB <= '1';
-				WB_Sel <= "10";
+				WB_Sel <= "11";
 				wait until rising_edge(clk_r);
 				wait until rising_edge(clk_r);
 				wait for 200 fs;
@@ -210,7 +214,7 @@ begin
 				skiptime_clk(10);
 				
 				--for 0x000A
-				WB_DataIn <= "1100101001110010";
+				WB_DataIn <= (others => '0');
 				WB_Cyc_2 <= '1';
 				WB_Addr <= (3 => '1',1 => '1', others => '0');
 				WB_WE <= '1';
@@ -237,12 +241,12 @@ begin
 				skiptime_clk(10);
 				
 				--for 0x000C
-				WB_DataIn <= "0011000001010001";
+				WB_DataIn <= (0 => '1', others => '0');
 				WB_Cyc_2 <= '1';
 				WB_Addr <= (3 => '1',2 => '1', others => '0');
 				WB_WE <= '1';
 				WB_STB <= '1';
-				WB_Sel <= "01";
+				WB_Sel <= "11";
 				wait until rising_edge(clk_r);
 				wait until rising_edge(clk_r);
 				wait for 200 fs;
@@ -251,7 +255,21 @@ begin
 				WB_WE <= '0';
 				
 				skiptime_clk(5);
+				WB_DataIn <= (1 => '1', others => '0');
+				WB_Cyc_2 <= '1';
+				WB_Addr <= (3 => '1',2 => '1', others => '0');
+				WB_WE <= '1';
+				WB_STB <= '1';
+				WB_Sel <= "11";
+				wait until rising_edge(clk_r);
+				wait until rising_edge(clk_r);
+				wait for 200 fs;
+				WB_STB <= '0';
+				WB_Cyc_2 <= '0';
+				WB_WE <= '0';
 				
+				skiptime_clk(5);
+				WB_DataIn <= (1 => '1', 0 => '1', others => '0');
 				WB_Cyc_2 <= '1';
 				WB_Addr <= (3 => '1',2 => '1', others => '0');
 				WB_STB <= '1';
@@ -262,7 +280,7 @@ begin
 				WB_STB <= '0';
 				WB_Cyc_2 <= '0';
 				
-				skiptime_clk(30);
+				skiptime_clk(15);
 				
 				--read FIFO
 				rdreq <= '1';
@@ -270,49 +288,8 @@ begin
 				wait for 200 fs;
 				rdreq <= '0';
 				skiptime_clk(15);
+				skiptime_clk(15);
 				
-				
-				-- write pack of data in FIFO
-				--CTI == 001
-	WB_CTI <= "001";
-	WB_Cyc_2 <= '1';
-	WB_Addr <= (3 => '1',2 => '1', others => '0');
-	WB_STB <= '1';
-	WB_Sel <= "11";
-	WB_WE <= '1';
-
-	WB_DataIn <= "0000000100000001";
-	wait until rising_edge(clk_r);
-	wait until rising_edge(clk_r);
-	WB_STB <= '0';
-	skiptime_clk(1);
-	
-	WB_STB <= '1';
-	WB_DataIn <= "0000000100000010";
-	wait until rising_edge(clk_r);
-	wait until rising_edge(clk_r);
-	WB_STB <= '0';
-	skiptime_clk(1);
-	WB_STB <= '1';
-	WB_DataIn <= "0000000100000011";
-	wait until rising_edge(clk_r);
-	wait until rising_edge(clk_r);
-	WB_STB <= '0';
-	skiptime_clk(1);
-	WB_STB <= '1';	
-	WB_DataIn <= "0000000100000100";
-	wait until rising_edge(clk_r);
-	wait until rising_edge(clk_r);
-	WB_STB <= '0';
-	skiptime_clk(1);
-	WB_STB <= '1';
-	WB_DataIn <= "0000000100000101";
-	wait until rising_edge(clk_r);
-	wait until rising_edge(clk_r);
-	WB_STB <= '0';
-
-	WB_CYC_2 <= '0';
-	skiptime_clk(15);
 				
 		end process;	
 
