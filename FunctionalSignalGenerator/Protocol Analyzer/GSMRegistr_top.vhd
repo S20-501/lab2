@@ -32,9 +32,8 @@ entity GSMRegistr_top is
         
 		  rdreq		: IN STD_LOGIC ;
 		  empty		: OUT STD_LOGIC ;
---	full		: OUT STD_LOGIC ;
 		  q		: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
---	usedw		: OUT STD_LOGIC_VECTOR (9 DOWNTO 0)
+
     );
 end entity GSMRegistr_top;
 
@@ -47,7 +46,8 @@ architecture rtl of GSMRegistr_top is
         wrreq : in STD_LOGIC;
         empty : out STD_LOGIC;
         almost_full : out STD_LOGIC;
-        q : out STD_LOGIC_VECTOR (15 DOWNTO 0)
+        q : out STD_LOGIC_VECTOR (15 DOWNTO 0);
+		  aclr		: in STD_LOGIC 
  --       usedw : out STD_LOGIC_VECTOR (9 DOWNTO 0)
       );
     end component;
@@ -81,7 +81,7 @@ architecture rtl of GSMRegistr_top is
 		SymbolFrequency_OUT	: out 	std_logic_vector( 31 downto 0);
 		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--идет в FIFO
 		wrreq						: out 	std_logic;
-		full 						: in 		std_logic;
+		full_fifo 						: in 		std_logic;
 		
 		rdreq_buff 				: out		std_logic;
 		empty_buff 				: in 		std_logic
@@ -119,7 +119,7 @@ architecture rtl of GSMRegistr_top is
 
 
 	signal wrreq 		: std_logic 	:= '0';
-	signal full_r 		: std_logic 	:= '0';
+	signal full_fifo_r 		: std_logic 	:= '0';
 	signal DataPort_r	: std_logic_vector( 15 downto 0 ) := (others=>'0');
 	signal rdreq_buff : std_logic := '0';
 	signal empty_buff : std_logic := '0';
@@ -169,7 +169,7 @@ begin
         SymbolFrequency_OUT => SymbolFrequency_OUT,
         DataPort_OUT => DataPort_r,
         wrreq => wrreq,
-		  full => full_r,
+		  full_fifo => full_fifo_r,
 		  rdreq_buff => rdreq_buff,
 		  empty_buff => empty_buff
 	 );
@@ -182,8 +182,9 @@ begin
             rdreq => rdreq,
             wrreq => wrreq,
             empty => empty,
-            almost_full => full_r,
-            q => q
+            almost_full => full_fifo_r,
+            aclr => "not"(nRst),
+				q => q
 --            usedw => usedw
         );
 	 DUT : ring_buffer
