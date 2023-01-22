@@ -77,7 +77,7 @@ begin
 				Mode_r <= '0';
 				rdreq_buff_r <= '0';
 			elsif (rising_edge(clk)) then
-				if((WB_STB and (WB_Cyc_0 or WB_Cyc_2) = '1') then--other operation
+				if((WB_STB and (WB_Cyc_0 or WB_Cyc_2)) = '1') then--other operation
 					if(Ack_r = '0') then
 						Ack_r <= '1';
 					else
