@@ -31,7 +31,7 @@ entity GSMRegister is
 		SymbolFrequency_OUT	: out 	std_logic_vector( 31 downto 0);
 		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--идет в FIFO
 		wrreq						: out 	std_logic;
-		full 						: in 		std_logic;
+		full_fifo 						: in 		std_logic;
 		
 		rdreq_buff 					: out		std_logic;
 		empty_buff 				: in 		std_logic
@@ -90,7 +90,7 @@ begin
 				
 				if (WB_Cyc_2 = '1' and WB_WE = '1' and WB_STB = '1' and WB_Addr = x"000C") then
 					if(wrreq_r = '0') then
-						if (full = '0') then
+						if (full_fifo = '0') then
 							wrreq_r <= '1';
 						else
 							wrreq_r <= '0';
@@ -187,7 +187,7 @@ begin
 								Symbol_Frequency_r( 15 downto 8 ) <= "00000000";
 							end if;
 						elsif(WB_Addr = x"000C") then
-							if (full = '0')then
+							if (full_fifo = '0')then
 								if(WB_Sel(0) = '1')then
 									DataPort_r( 7 downto 0 ) <= WB_DataIn(7 downto 0);
 								else
