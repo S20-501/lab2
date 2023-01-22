@@ -58,6 +58,7 @@ begin
 				WB_Cyc_2 <= '1';
 				WB_Sel <= "11";
 				WB_WE <= '1';
+				WB_CTI <= "001";
 				counter: for k in 0 to 1024 loop
 					WB_STB <= '1'; 
 					WB_DataIn <= WB_DataIn_r;
@@ -68,11 +69,27 @@ begin
 					WB_STB <= '0';
 					skiptime_clk(1);
 				end loop counter ;
-
+				WB_CTI <= "111";
+				WB_STB <= '1'; 
+				WB_DataIn <= WB_DataIn_r;
+				WB_DataIn_r <= std_logic_vector(unsigned(WB_DataIn_r) + 1);
+					
+				wait until rising_edge(clk_r);
+				wait until rising_edge(clk_r);
+				WB_STB <= '0';
+				skiptime_clk(1);
 				-- Stop writing
-			
+				WB_CTI <= "000";
+--				skiptime_clk(10);
+--				nRst <= '0';
+--				wait until rising_edge(clk_r);
+--				nRst <= '1';
 				skiptime_clk(10);
+				WB_Addr <= (3 => '1',2 => '1', others => '0');
+				WB_Cyc_2 <= '1';
+				WB_Sel <= "11";
 				WB_WE <= '0';
+				WB_CTI <= "001";
 				read_counter: for k in 0 to 1024 loop
 					WB_STB <= '1'; 
 					wait until rising_edge(clk_r);
@@ -80,9 +97,13 @@ begin
 					WB_STB <= '0';
 					skiptime_clk(1);
 				end loop read_counter ;
-				
-				
-				
+				WB_CTI <= "111";
+				WB_STB <= '1';
+				wait until rising_edge(clk_r);
+				wait until rising_edge(clk_r);
+				WB_STB <= '0';
+				WB_CTI <= "000";
+				skiptime_clk(100);								
 		end process;	
 
 end architecture;
