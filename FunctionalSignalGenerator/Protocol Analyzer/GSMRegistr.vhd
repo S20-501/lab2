@@ -159,7 +159,7 @@ begin
 								Carrier_Frequency_r( 7 downto 0 ) <= "00000000";
 							end if;
 							if(WB_Sel(1) = '1')then
-								Carrier_Frequency_r( 15 downto 8 ) <= WB_DataIn(7 downto 0);
+								Carrier_Frequency_r( 15 downto 8 ) <= WB_DataIn(15 downto 8);
 							else
 								Carrier_Frequency_r( 15 downto 8 ) <= "00000000";
 							end if;
@@ -182,7 +182,7 @@ begin
 								Symbol_Frequency_r( 7 downto 0 ) <= "00000000";
 							end if;
 							if(WB_Sel(1) = '1')then
-								Symbol_Frequency_r( 15 downto 8 ) <= WB_DataIn(7 downto 0);
+								Symbol_Frequency_r( 15 downto 8 ) <= WB_DataIn(15 downto 8);
 							else
 								Symbol_Frequency_r( 15 downto 8 ) <= "00000000";
 							end if;
@@ -194,7 +194,7 @@ begin
 									DataPort_r( 7 downto 0 ) <= "00000000";
 								end if;
 								if(WB_Sel(1) = '1')then
-									DataPort_r( 15 downto 8 ) <= WB_DataIn(7 downto 0);
+									DataPort_r( 15 downto 8 ) <= WB_DataIn(15 downto 8);
 								else
 									DataPort_r( 15 downto 8 ) <= "00000000";
 								end if;
@@ -235,7 +235,6 @@ begin
 								WB_DataOut_2_r(15 downto 8) <= "00000000";
 							end if;
 						elsif(WB_Addr = x"000A") then
-							WB_DataOut_2_r <= Symbol_Frequency_r( 15 downto 0 );
 							if(WB_Sel(0) = '1')then
 								WB_DataOut_2_r(7 downto 0) <= Symbol_Frequency_r( 7 downto 0 );
 							else
