@@ -80,9 +80,15 @@ begin
 				if((WB_STB and WB_Cyc_2) = '1') then--other operation
 					if(Ack_r = '0') then
 						if (WB_Addr = x"000C")then
-						   if (full = '0') then
-						     Ack_r <= '1';
-						   end if;
+							if(WB_WE = '1') then
+								if (full = '0') then
+									Ack_r <= '1';
+								end if;
+							else
+								if(empty_buff = '0') then
+									Ack_r <= '1';
+								end if;
+							end if;
 						else
 							Ack_r <= '1';
 						end if;
