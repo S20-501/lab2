@@ -131,34 +131,121 @@ begin
 					elsif(WB_WE = '0' and WB_STB = '1') then
 						if(WB_Addr = x"0000") then
 							WB_DataOut_0_r(15 downto 7) <= "000000000";
-							WB_DataOut_0_r(6 downto 0) <= Sync_r & nRstDDS_r & Signal_mode_r & Modulation_mode_r & Mode_r;
+							if(WB_Sel(0) = '1')then
+								WB_DataOut_0_r(6 downto 0) <= Sync_r & nRstDDS_r & Signal_mode_r & Modulation_mode_r & Mode_r;
+							else
+								WB_DataOut_0_r(6 downto 0) <= "0000000";
+							end if;
 						end if;
 					end if;
 					--
 				elsif (WB_Cyc_2 = '1') then
 					if(WB_WE = '1' and WB_STB = '1') then
 						if(WB_Addr = x"0004") then
-							Carrier_Frequency_r( 31 downto 16 ) <= WB_DataIn;
+							if(WB_Sel(0) = '1')then
+								Carrier_Frequency_r( 23 downto 16 ) <= WB_DataIn(7 downto 0);
+							else 
+								Carrier_Frequency_r( 23 downto 16 ) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1') then
+								Carrier_Frequency_r( 31 downto 24 ) <= WB_DataIn(15 downto 8);
+							else 
+								Carrier_Frequency_r( 31 downto 24 ) <= "00000000";
+							end if;
 						elsif(WB_Addr = x"0006") then
-							Carrier_Frequency_r( 15 downto 0 ) <= WB_DataIn;
+							if(WB_Sel(0) = '1')then
+								Carrier_Frequency_r( 7 downto 0 ) <= WB_DataIn(7 downto 0);
+							else
+								Carrier_Frequency_r( 7 downto 0 ) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1')then
+								Carrier_Frequency_r( 15 downto 8 ) <= WB_DataIn(7 downto 0);
+							else
+								Carrier_Frequency_r( 15 downto 8 ) <= "00000000";
+							end if;
 						elsif(WB_Addr = x"0008") then
-							Symbol_Frequency_r( 31 downto 16 ) <= WB_DataIn;
+							if(WB_Sel(0) = '1')then
+								Symbol_Frequency_r( 23 downto 16 ) <= WB_DataIn(7 downto 0);
+							else 
+								Symbol_Frequency_r( 23 downto 16 ) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1') then
+								Symbol_Frequency_r( 31 downto 24 ) <= WB_DataIn(15 downto 8);
+							else 
+								Symbol_Frequency_r( 31 downto 24 ) <= "00000000";
+							end if;
 						elsif(WB_Addr = x"000A") then
 							Symbol_Frequency_r( 15 downto 0 ) <= WB_DataIn;
+							if(WB_Sel(0) = '1')then
+								Symbol_Frequency_r( 7 downto 0 ) <= WB_DataIn(7 downto 0);
+							else
+								Symbol_Frequency_r( 7 downto 0 ) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1')then
+								Symbol_Frequency_r( 15 downto 8 ) <= WB_DataIn(7 downto 0);
+							else
+								Symbol_Frequency_r( 15 downto 8 ) <= "00000000";
+							end if;
 						elsif(WB_Addr = x"000C") then
 							if (full = '0')then
-								DataPort_r <= WB_DataIn;
+								if(WB_Sel(0) = '1')then
+									DataPort_r( 7 downto 0 ) <= WB_DataIn(7 downto 0);
+								else
+									DataPort_r( 7 downto 0 ) <= "00000000";
+								end if;
+								if(WB_Sel(1) = '1')then
+									DataPort_r( 15 downto 8 ) <= WB_DataIn(7 downto 0);
+								else
+									DataPort_r( 15 downto 8 ) <= "00000000";
+								end if;
 							end if;
 						end if;
 					elsif(WB_WE = '0' and WB_STB = '1') then
 						if(WB_Addr = x"0004") then
-							WB_DataOut_2_r <= Carrier_Frequency_r( 31 downto 16 );
+							if(WB_Sel(0) = '1')then
+								WB_DataOut_2_r(7 downto 0) <= Carrier_Frequency_r( 23 downto 16 );
+							else
+								WB_DataOut_2_r(7 downto 0) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1')then
+								WB_DataOut_2_r(15 downto 8) <= Carrier_Frequency_r( 31 downto 24 );
+							else
+								WB_DataOut_2_r(15 downto 8) <= "00000000";
+							end if;
 						elsif(WB_Addr = x"0006") then
-							WB_DataOut_2_r <= Carrier_Frequency_r( 15 downto 0 );
+							if(WB_Sel(0) = '1')then
+								WB_DataOut_2_r(7 downto 0) <= Carrier_Frequency_r( 7 downto 0 );
+							else
+								WB_DataOut_2_r(7 downto 0) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1')then
+								WB_DataOut_2_r(15 downto 8) <= Carrier_Frequency_r( 15 downto 8 );
+							else
+								WB_DataOut_2_r(15 downto 8) <= "00000000";
+							end if;
 						elsif(WB_Addr = x"0008") then
-							WB_DataOut_2_r <= Symbol_Frequency_r( 31 downto 16 );
+							if(WB_Sel(0) = '1')then
+								WB_DataOut_2_r(7 downto 0) <= Symbol_Frequency_r( 23 downto 16 );
+							else
+								WB_DataOut_2_r(7 downto 0) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1')then
+								WB_DataOut_2_r(15 downto 8) <= Symbol_Frequency_r( 31 downto 24 );
+							else
+								WB_DataOut_2_r(15 downto 8) <= "00000000";
+							end if;
 						elsif(WB_Addr = x"000A") then
 							WB_DataOut_2_r <= Symbol_Frequency_r( 15 downto 0 );
+							if(WB_Sel(0) = '1')then
+								WB_DataOut_2_r(7 downto 0) <= Symbol_Frequency_r( 7 downto 0 );
+							else
+								WB_DataOut_2_r(7 downto 0) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1')then
+								WB_DataOut_2_r(15 downto 8) <= Symbol_Frequency_r( 15 downto 8 );
+							else
+								WB_DataOut_2_r(15 downto 8) <= "00000000";
+							end if;
 						end if;
 					end if;
 				end if;
