@@ -31,10 +31,7 @@ entity GSMRegister is
 		SymbolFrequency_OUT	: out 	std_logic_vector( 31 downto 0);
 		DataPort_OUT			: out 	std_logic_vector( 15 downto 0);--идет в FIFO
 		wrreq						: out 	std_logic;
-		full_fifo 						: in 		std_logic;
-		
-		rdreq_buff 					: out		std_logic;
-		empty_buff 				: in 		std_logic
+		full_fifo 						: in 		std_logic
 	);
 end entity GSMRegister;
 architecture Behavior of GSMRegister is
@@ -53,11 +50,63 @@ architecture Behavior of GSMRegister is
 	signal	Signal_mode_r				: 	std_logic_vector( 1 downto 0);
 	signal	Modulation_mode_r			: 	std_logic_vector( 1 downto 0);
 	signal	Mode_r						: 	std_logic;
+		
+	component ring_buffer
+		generic (
+			RAM_WIDTH : natural;
+			RAM_DEPTH : natural
+		);
+		port (
+			clk : in std_logic;
+			nRst : in std_logic;
+
+			-- Write port
+			wr_en : in std_logic;
+			wr_data : in std_logic_vector(RAM_WIDTH - 1 downto 0);
+
+			-- Read port
+			rd_en : in std_logic;
+			rd_valid : out std_logic;
+			rd_data : out std_logic_vector(RAM_WIDTH - 1 downto 0);
 	
-	signal 	rdreq_buff_r 				:	std_logic;
+			-- Flags
+			empty : out std_logic;
+			empty_next : out std_logic;
+			full : out std_logic;
+			full_next : out std_logic;
+
+			-- The number of elements in the FIFO
+			fill_count : out integer range RAM_DEPTH - 1 downto 0
+		);
+	end component;
+
+	signal rdreq_buff_r : std_logic := '0';
+	signal empty_buff_r : std_logic := '0';
+	signal DataOut_Ring_r: std_logic_vector(15 downto 0);
+
+		
+	constant RAM_WIDTH : natural := 16;
+	constant RAM_DEPTH : natural := 1024;
+	
 
 begin
-		
+		DUT : ring_buffer
+		 generic map (
+			RAM_WIDTH => RAM_WIDTH,
+			RAM_DEPTH => RAM_DEPTH
+		 )
+		port map (
+			clk => clk,
+			nRst => nRst,
+			
+			wr_en => wrreq_r,
+			wr_data => DataPort_r,
+			
+			rd_en => rdreq_buff_r,
+			rd_data => DataOut_Ring_r,
+			
+			empty => empty_buff_r
+		);
 		process(clk,nRst, WB_STB, WB_WE, WB_Cyc_0, WB_Cyc_2)
 		begin
 			if (nRst = '0') then
@@ -105,7 +154,7 @@ begin
 				
 				if(WB_Cyc_2 = '1' and WB_WE = '0' and WB_STB = '1' and WB_Addr = x"000C") then
 					if(rdreq_buff_r = '0') then
-						if (empty_buff = '0') then
+						if (empty_buff_r = '0') then
 							rdreq_buff_r <= '1';
 						else
 							rdreq_buff_r <= '0';
@@ -245,6 +294,17 @@ begin
 							else
 								WB_DataOut_2_r(15 downto 8) <= "00000000";
 							end if;
+						elsif(WB_Addr = x"000C") then
+							if(WB_Sel(0) = '1')then
+								WB_DataOut_2_r(7 downto 0) <= DataOut_Ring_r( 7 downto 0 );
+							else
+								WB_DataOut_2_r(7 downto 0) <= "00000000";
+							end if;
+							if(WB_Sel(1) = '1')then
+								WB_DataOut_2_r(15 downto 8) <= DataOut_Ring_r( 15 downto 8 );
+							else
+								WB_DataOut_2_r(15 downto 8) <= "00000000";
+							end if;
 						end if;
 					end if;
 				end if;
@@ -264,5 +324,4 @@ begin
 	WB_Ack <= Ack_r;
 	WB_DataOut_0 <= WB_DataOut_0_r;
 	WB_DataOut_2 <= WB_DataOut_2_r;
-	rdreq_buff <= rdreq_buff_r;
 end architecture Behavior;
