@@ -1,1 +1,6 @@
 Соединение с другими модулями для modelsim
+также в проект в modelsim нужно добавить актуадьные версии файлов
+GSMRegistr.vhd
+GSMRegistr_top.vhd
+finalFifo.vhd
+ring_buffer.vhd
