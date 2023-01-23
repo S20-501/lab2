@@ -10,7 +10,7 @@ entity separator is
 	
 		  
 		  
-        Clk   : in std_logic;
+        clk   : in std_logic;
         nRst: in std_logic;
         ReceiveDataMode: in std_logic;
 		  DataStrobe: in std_logic;
@@ -55,7 +55,7 @@ begin
     DataValid <= DataStrobe;
 
 
-    SignalSeparation: process (nRst, Clk)
+    SignalSeparation: process (nRst, clk)
     begin
         if(DataStrobe = '0') then 
 		     I_temp <= (others => '0');

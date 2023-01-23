@@ -3,18 +3,18 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_arith.all;
 use ieee.std_logic_signed.all;
 
-entity Quadratic_Geterodin_tb is
-end entity Quadratic_Geterodin_tb;
+entity Quadratic_Geterodin_input_tb is
+end entity Quadratic_Geterodin_input_tb;
 
-architecture a_Quadratic_Geterodin_tb of Quadratic_Geterodin_tb is
+architecture a_Quadratic_Geterodin_input_tb of Quadratic_Geterodin_input_tb is
       signal  clk	:  std_logic;
       signal  nRst	: std_logic;
       signal  ReceiveDataMode:  std_logic;
-		  signal  DataStrobe:  std_logic;
-      signal  ISig_In:  std_logic_vector(9 downto 0);
-		  signal  QSig_In:  std_logic_vector(9 downto 0);
+		 
       signal  clear		: 	std_logic;
 	  	signal  AutoFreqConEn	:  std_logic;
+signal  increment_phase_i  :  std_logic_vector(31 downto 0);
+signal  increment_phase_q  :  std_logic_vector(31 downto 0);
       signal  HFreqDWord	:  std_logic_vector(31 downto 0);
       signal  HIncrFreqWord	:  std_logic_vector(15 downto 0);
       signal  TimeCount	:  std_logic_vector(15 downto 0);
@@ -25,17 +25,17 @@ architecture a_Quadratic_Geterodin_tb of Quadratic_Geterodin_tb is
   
   
   
-    component Quadratic_Geterodin 
+    component Quadratic_Geterodin_input 
 	 port(
     -- Входные сигналы
 		clk	: in std_logic;
 		nRst	: in std_logic;
     ReceiveDataMode     : in std_logic;
-    ISig_In : in std_logic_vector(9 downto 0);
-    QSig_In : in std_logic_vector(9 downto 0);
-    DataStrobe   : in std_logic;
+  
     clear		: in	std_logic;
     AutoFreqConEn	: in std_logic;
+increment_phase_i  : in std_logic_vector(31 downto 0);
+increment_phase_q  : in std_logic_vector(31 downto 0);
     HFreqDWord	: in std_logic_vector(31 downto 0);
     HIncrFreqWord	: in std_logic_vector(15 downto 0);
     TimeCount	: in std_logic_vector(15 downto 0);
@@ -50,16 +50,16 @@ architecture a_Quadratic_Geterodin_tb of Quadratic_Geterodin_tb is
 		  end component;
         
 
-    component Quadratic_Geterodin_tester
+    component Quadratic_Geterodin_input_tester
         port (
 		clk	: out std_logic;
 		nRst	: out std_logic;
     ReceiveDataMode     : out std_logic;
-    ISig_In : out std_logic_vector(9 downto 0);
-    QSig_In : out std_logic_vector(9 downto 0);
-    DataStrobe   : out std_logic;
+   
     clear		: out	std_logic;
     AutoFreqConEn	: out std_logic;
+increment_phase_i  : out std_logic_vector(31 downto 0);
+increment_phase_q  : out std_logic_vector(31 downto 0);
     HFreqDWord	: out std_logic_vector(31 downto 0);
     HIncrFreqWord	: out std_logic_vector(15 downto 0);
     TimeCount	: out std_logic_vector(15 downto 0);
@@ -71,17 +71,18 @@ architecture a_Quadratic_Geterodin_tb of Quadratic_Geterodin_tb is
 	 
 	 
 begin
-	Quadratic_Geterodin_inst: Quadratic_Geterodin
+	Quadratic_Geterodin_input_inst: Quadratic_Geterodin_input
 	port map(
 	
 		clk => clk,
 		nRst => nRst,
 		ReceiveDataMode => ReceiveDataMode,
-		ISig_In => ISig_In,
-		QSig_In => QSig_In,
-    DataStrobe => DataStrobe,
+		
+   
 		clear => clear,
     AutoFreqConEn => AutoFreqConEn,
+ increment_phase_i  => increment_phase_i,
+ increment_phase_q  => increment_phase_q,
     HFreqDWord => HFreqDWord,
     HIncrFreqWord => HIncrFreqWord,
     TimeCount => TimeCount,
@@ -93,16 +94,17 @@ begin
    
   );
 
-    Quadratic_Geterodin_tester_i : entity work.Quadratic_Geterodin_tester
+    Quadratic_Geterodin_tester_input_i : entity work.Quadratic_Geterodin_input_tester
     port map (
         clk => clk,
 		    nRst => nRst,
 		    ReceiveDataMode => ReceiveDataMode,
-		    ISig_In => ISig_In,
-		    QSig_In => QSig_In,
-        DataStrobe => DataStrobe,
+		   
+       
 		    clear => clear,
         AutoFreqConEn => AutoFreqConEn,
+ increment_phase_i  => increment_phase_i,
+ increment_phase_q  => increment_phase_q,
        HFreqDWord => HFreqDWord,
        HIncrFreqWord => HIncrFreqWord,
         TimeCount => TimeCount,
