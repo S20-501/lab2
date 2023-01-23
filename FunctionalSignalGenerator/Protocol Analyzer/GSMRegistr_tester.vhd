@@ -214,7 +214,7 @@ begin
 				skiptime_clk(10);
 				
 				--for 0x000A
-				WB_DataIn <= (others => '0');
+				WB_DataIn <= "0101010111011011";
 				WB_Cyc_2 <= '1';
 				WB_Addr <= (3 => '1',1 => '1', others => '0');
 				WB_WE <= '1';
