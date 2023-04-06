@@ -33,31 +33,45 @@ begin
 	
 	tester_process: process
 	begin
+		-- Test 1
 		DAC_I_sig <= "1111100000";
 		DAC_Q_sig <= "0000011111";
-      Rst_For_DAC <= '0';
 		Power_Down <= '0';
-		
-      nRst <= '0';
-      skiptime_Clk(6);
-      nRst <= '1';
-		
-		skiptime_Clk(20);
-		
-		Rst_For_DAC <= '1';
-		skiptime_Clk(12);
-		
 		Rst_For_DAC <= '0';
-		Power_Down <= '1';
-		skiptime_Clk(6);
-		
-		Rst_For_DAC <= '1';
-		Power_Down <= '1';
-		skiptime_Clk(6);
-        
+		nRst <= '1';
+		skiptime_Clk(10);
+
+		--Test 2
+		wait for 33 ns;
 		nRst <= '0';
-		skiptime_Clk(6);
-		
+		skiptime_Clk(5);
+		nRst <= '1';
+		skiptime_Clk(10);
+
+		--Test3
+		wait for 33 ns;
+		Rst_For_DAC <= '1';
+		skiptime_Clk(2);
+		Rst_For_DAC <= '0';
+		skiptime_Clk(10);
+
+		--Test4
+		Rst_For_DAC <= '1';
+		skiptime_Clk(2);
+		nRst <= '0';
+		skiptime_Clk(4);
+		Rst_For_DAC <= '0';
+		skiptime_Clk(4);
+		nRst <= '1';
+		skiptime_Clk(10);
+
+		--Test 5
+		wait for 33 ns;
+		Power_Down <= '1';
+		skiptime_Clk(3);
+		Power_Down <= '0';
+		skiptime_Clk(4);
+
 		report "Calling 'stop'";
       stop;
 	end process;
