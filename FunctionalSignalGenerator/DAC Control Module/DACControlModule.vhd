@@ -13,26 +13,47 @@ entity DACControlModule is
 			Power_Down: in std_logic; --Turn off DAC.If DAC_Rst=1 during 4 clocks of DAC_Clk, DAC circuit turns off
 			
 			
-			DAC_Clk: out std_logic;
+			DAC_Clk: out std_logic := '0';
 			DAC_Rst: out std_logic;	
-			DAC_Write: out std_logic;
-			DAC_Select: out std_logic;
-			DAC_Data: out std_logic_vector(9 downto 0)
+			DAC_Write: out std_logic := '1';
+			DAC_Select: out std_logic := '1';
+			DAC_Data: out std_logic_vector(9 downto 0) := "0000000000"
 		  );
 end DACControlModule;
 
 
 architecture Behavioral of DACControlModule is
-	signal ClkReduceFreq_count: std_logic := '0';
-	signal DAC_Select_buf_r: std_logic := '0';
 	signal DAC_Rst_buf_r: std_logic := '0';
 	signal DAC_Rst_count: std_logic_vector(3 downto 0) := (others=>'0');
-	signal DAC_Clk_falling_r: std_logic := '0';
-	signal Select_Enable_r: std_logic := '0';
+	signal Clk_count: std_logic_vector(3 downto 0) := (others=>'0');
+	signal Select_Enable_r: std_logic := '1';
+	signal Power_Down_r: std_logic := '0';
 	
 	
 begin
+	--настраиваем регистр сброса, регистр выключения и регистр доступа к данным
+	process(Clk,nRst,Rst_For_DAC,Power_Down)
+	begin
+		if (rising_edge(Clk)) then
+			DAC_Rst_buf_r <= (not nRst or Rst_For_DAC);
+			Power_Down_r <= Power_Down;
+			Select_Enable_r <= ((nRst and not Rst_For_DAC) and (not Power_Down) and not DAC_Rst_count(3));
+		end if;
+	end process;
 	
+	--счетчик тактов, сбрасываем его при условии включенного регистра сброса или регистра выключения
+	process(Clk,Power_Down_r)
+	begin
+		if rising_edge(Clk) then
+			if (DAC_Rst_buf_r='1' or Power_Down_r='1') then
+				Clk_count <= "0000";
+			else
+				Clk_count <= Clk_count + 1;
+			end if;
+		end if;
+	end process;
+
+	-- счетчик тактов при включенном ресете
 	process(Clk,nRst)
 	begin
 		if (nRst = '0') then
@@ -46,95 +67,35 @@ begin
 		end if;
 	end process;
 	
-	
-	process(Clk,nRst,Power_Down,DAC_Rst_count)  -- 80 MHz -> 40 MHz
+	DAC_signals_assignment : process(DAC_Rst_buf_r,Clk,Power_Down_r,Clk_count)
 	begin
-		if (nRst='0' or Power_Down='1' or DAC_Rst_count >= "1000") then
-			ClkReduceFreq_count <= '0';
-		elsif (rising_edge(Clk)) then
-			ClkReduceFreq_count <= not ClkReduceFreq_count;
-		end if;
-	end process;
-
-	
-	process(nRst,Rst_For_DAC)
-	begin
-		if (nRst='0' or Rst_For_DAC='1') then
-			DAC_Rst_buf_r <= '1';
+		if (Power_Down_r='1') then
+			DAC_Rst <= '0';
 		else
-			DAC_Rst_buf_r <= '0';
+			DAC_Rst <= DAC_Rst_buf_r;
 		end if;
-	end process;
-	
-	
-	
-	process(Clk,nRst,Power_Down,DAC_Rst_count)
-	begin
-		if (nRst='0' or Power_Down='1' or DAC_Rst_count >= "1000") then
-			DAC_Clk_falling_r <= '0';
-			
-		elsif (rising_edge(Clk)) then
-			DAC_Clk_falling_r <= not DAC_Clk_falling_r;
-			
-		end if;
-	
-	end process;
-	
-	
-	process(Clk,nRst,Power_Down,DAC_Rst_count,DAC_Rst_buf_r)
-	begin
-		if (nRst='0' or Power_Down='1' or DAC_Rst_count >= "1000" or DAC_Rst_buf_r='1') then
-			Select_Enable_r <= '0';
-			
-		elsif(rising_edge(Clk)) then
-			if (ClkReduceFreq_count='1') then
-				Select_Enable_r <= '1';
+
+		if falling_edge(Clk) then
+			if Select_Enable_r='1' then
+				DAC_Write <= not Clk_count(0);
+			else
+				DAC_Write <= '0';
 			end if;
-		end if;
-	end process;
-	
-	
-	process(Clk,nRst,Power_Down,DAC_Rst_count,DAC_Rst_buf_r)
-	begin
-		if (nRst='0' or Power_Down='1' or DAC_Rst_count >= "1000" or DAC_Rst_buf_r='1') then
+		end if ;
+
+		if (Select_Enable_r='0') then
+			DAC_Clk <= '0';
+			DAC_Select <= '0';
 			DAC_Data <= "0000000000";
-			
-		elsif (falling_edge(Clk)) then
-			if (Select_Enable_r='1') then
-				if (DAC_Select_buf_r='1') then
-					DAC_Data <= DAC_I_sig;
-				elsif (DAC_Select_buf_r='0') then
-					DAC_Data <= DAC_Q_sig;
-				end if;
+		elsif (Select_Enable_r='1') then
+			DAC_Clk <= Clk_count(0);
+			DAC_Select <= not Clk_count(1);
+			if (Clk_count(1)='0') then
+				DAC_Data <= DAC_I_sig;
+			elsif (Clk_count(1)='1') then
+				DAC_Data <= DAC_Q_sig;
 			end if;
 		end if;
 	end process;
-	
-	
-	process(Clk,nRst) 
-	begin
-	
-		if (nRst='0') then
-			DAC_Select_buf_r <= '0';
-			
-		elsif (rising_edge(Clk)) then
-				if (DAC_Clk_falling_r = '1') then  --falling edge of DAC_Clk
-					DAC_Select_buf_r <= not DAC_Select_buf_r;  --route to I DAC
-				end if;
-			
-		end if;
-	end process;
-	
-	
-	
-	DAC_signals_assignment : process(ClkReduceFreq_count,DAC_Rst_buf_r,DAC_Select_buf_r)
-	begin
-		DAC_Clk <= ClkReduceFreq_count;
-		DAC_Rst <= DAC_Rst_buf_r;
-		DAC_Write <= ClkReduceFreq_count;
-		DAC_Select <= DAC_Select_buf_r;
-	end process;
-	
-	
 	
 end Behavioral;
